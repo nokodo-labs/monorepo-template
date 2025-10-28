@@ -24,6 +24,15 @@
 		"**/node_modules/**": true
 	},
 
+	// Git & GitHub
+	"git.enableSmartCommit": true,
+	"git.autofetch": true,
+	"git.confirmSync": false,
+	"[github-actions-workflow]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"githubIssues.issueBranchTitle": "issues/${issueNumber}-${user}",
+
 	// Python
 	"python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/bin/python",
 	"[python]": {
@@ -85,22 +94,12 @@
 	],
 
 	// Search
+	"search.useIgnoreFiles": true,
 	"search.exclude": {
 		"**/node_modules": true,
 		"**/dist": true,
 		"**/.venv": true,
 		"**/__pycache__": true,
 		"**/.pytest_cache": true
-	},
-
-	// Terminal
-	"terminal.integrated.env.windows": {
-		"PYTHONPATH": "${workspaceFolder}/backend"
-	},
-	"terminal.integrated.env.linux": {
-		"PYTHONPATH": "${workspaceFolder}/backend"
-	},
-	"terminal.integrated.env.osx": {
-		"PYTHONPATH": "${workspaceFolder}/backend"
 	}
 }
