@@ -1,0 +1,35 @@
+{
+	"recommendations": [
+		// Python
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"charliermarsh.ruff",
+
+		// JavaScript/TypeScript/Svelte
+		"svelte.svelte-vscode",
+		"bradlc.vscode-tailwindcss",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+
+		// Docker
+		"ms-azuretools.vscode-docker",
+
+		// Database
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-pg",
+
+		// Git
+		"eamodio.gitlens",
+
+		// AI Assistants
+		"github.copilot",
+		"github.copilot-chat",
+
+		// Utilities
+		"editorconfig.editorconfig",
+		"usernamehw.errorlens",
+		"christian-kohler.path-intellisense",
+		"visualstudioexptteam.vscodeintellicode",
+		"gruntfuggly.todo-tree"
+	]
+}

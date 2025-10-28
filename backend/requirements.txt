@@ -1,0 +1,3 @@
+# Auto-generated from pyproject.toml
+# Run: pip install -e .[dev]
+# Or for production: pip install -e .

@@ -1,0 +1,95 @@
+{
+	// Editor
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"files.eol": "\n",
+
+	// Files
+	"files.exclude": {
+		"**/__pycache__": true,
+		"**/.pytest_cache": true,
+		"**/.mypy_cache": true,
+		"**/.ruff_cache": true,
+		"**/node_modules": true,
+		"**/.svelte-kit": true
+	},
+	"files.watcherExclude": {
+		"**/__pycache__/**": true,
+		"**/node_modules/**": true
+	},
+
+	// Python
+	"python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/bin/python",
+	"[python]": {
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit",
+			"source.organizeImports": "explicit"
+		}
+	},
+	"python.analysis.typeCheckingMode": "basic",
+	"python.analysis.autoImportCompletions": true,
+	"python.testing.pytestEnabled": true,
+	"python.testing.unittestEnabled": false,
+
+	// Ruff (Python linting/formatting)
+	"ruff.enable": true,
+	"ruff.organizeImports": true,
+	"ruff.fixAll": true,
+
+	// JavaScript/TypeScript
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// Svelte
+	"svelte.enable-ts-plugin": true,
+
+	// Tailwind CSS
+	"tailwindCSS.experimental.classRegex": [
+		["class:\\s*?[\"'`]([^\"'`]*).*?[\"'`]", "[\"'`]([^\"'`]*).*?[\"'`]"]
+	],
+
+	// Docker
+	"docker.commands.build": "${containerCommand} build --pull --rm -f \"${dockerfile}\" -t ${tag} \"${context}\"",
+	"docker.commands.compose": "docker compose",
+
+	// Search
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/dist": true,
+		"**/.venv": true,
+		"**/__pycache__": true,
+		"**/.pytest_cache": true
+	},
+
+	// Terminal
+	"terminal.integrated.env.windows": {
+		"PYTHONPATH": "${workspaceFolder}/backend"
+	},
+	"terminal.integrated.env.linux": {
+		"PYTHONPATH": "${workspaceFolder}/backend"
+	},
+	"terminal.integrated.env.osx": {
+		"PYTHONPATH": "${workspaceFolder}/backend"
+	}
+}
