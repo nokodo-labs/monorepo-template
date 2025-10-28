@@ -14,7 +14,7 @@
     "generate:api-types": "openapi-typescript http://localhost:8000/v1/openapi.json -o src/lib/api/types.ts"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@tsconfig/svelte": "^5.0.4",
     "@types/node": "^22.8.6",
     "autoprefixer": "^10.4.20",
