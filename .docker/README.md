@@ -1,20 +1,6 @@
 # Docker Configuration
 
-## Usage
-
-```bash
-# Start all services
-docker compose up -d
-
-# Dev mode (hot reload)
-docker compose --profile dev up
-
-# Stop
-docker compose down
-
-# Remove volumes
-docker compose down -v
-```
+Docker Compose setup for the full stack.
 
 ## Services
 
@@ -22,11 +8,12 @@ docker compose down -v
 -   **backend**: FastAPI (port 8000)
 -   **frontend**: Nginx static build (port 80)
 
-## Configuration
+## Usage
 
-Edit environment variables in `docker-compose.yml`:
+```bash
+docker compose up -d              # Start all
+docker compose --profile dev up   # Dev mode (hot reload)
+docker compose down               # Stop
+```
 
--   Database credentials
--   Secret key (MUST change in production)
--   CORS origins
--   Debug mode
+See [../docs/setup.md](../docs/setup.md) for full documentation.

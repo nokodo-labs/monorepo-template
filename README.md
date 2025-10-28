@@ -14,21 +14,7 @@ Modern full-stack boilerplate: FastAPI backend + Svelte 5 frontend with containe
 
 ### 1. Customize Template
 
-**Required customizations** before using:
-
-```bash
-# 1. Rename project_name directory
-mv backend/project_name backend/your-project-name
-
-# 2. Update all references to "project-name" (search & replace):
-#    - tools/release_please/*.json: "project-name" → "your-project-name"
-#    - backend/project_name imports → your_project_name
-#    - .github/CODEOWNERS: Add your team handles
-
-# 3. Update project metadata
-#    - backend/api/core/config.py: PROJECT_NAME
-#    - frontend/package.json: name field
-```
+**First time setup**: Rename `backend/project_name/` and update references. See [docs/setup.md](docs/setup.md) for details.
 
 ### 2. Start Services
 
@@ -89,77 +75,21 @@ tools/release_please/      # Release automation config
 -   **OpenAPI types** - Auto-generated TypeScript types from FastAPI schema
 -   **Type safety** - Backend changes = compile errors in frontend if incompatible
 
-**Customization Required Before Use:**
-
-1.  Rename `backend/project_name/` → `backend/your-project-slug/`
-2.  Search & replace `"project-name"` in `tools/release_please/*.json`
-3.  Configure `.github/CODEOWNERS` with your GitHub handles
-4.  Update `PROJECT_NAME` in `backend/api/core/config.py`
+**Customization Required Before Use:** See [docs/setup.md](docs/setup.md) for complete setup instructions.
 
 ## Configuration
 
-### Backend (.env)
-
-```env
-DATABASE_URL=postgresql+psycopg://user:pass@localhost:5432/db
-DEBUG=False
-SECRET_KEY=change-in-production
-```
-
-### Frontend (.env)
-
-```env
-VITE_API_URL=http://localhost:8000/v1
-```
-
-### Docker Compose
-
-Edit `.docker/docker-compose.yml`:
-
--   Database credentials (POSTGRES_PASSWORD)
--   Secret key (SECRET_KEY)
--   CORS origins
--   Ports if conflicts exist
-
-## Local Dev (No Docker)
-
-```bash
-# Backend
-cd backend
-python -m venv .venv && .venv\Scripts\Activate.ps1  # Windows
-pip install -e .[dev]
-cp .env.example .env
-uvicorn api.main:app --reload
-
-# Frontend
-cd frontend
-npm install
-cp .env.example .env
-npm run dev
-```
+See [docs/setup.md](docs/setup.md) for environment variable setup and configuration details.
 
 ## Commands
 
+See [docs/setup.md](docs/setup.md) for full command reference.
+
 ```bash
-# Docker (from .docker/)
-docker compose up -d              # Start all
-docker compose down               # Stop
-docker compose logs -f [service]  # View logs
-docker compose down -v            # Remove volumes
-
-# Backend (from backend/)
-pytest api/tests/ -v              # Run API tests
-pytest --cov=api --cov=project_name tests/  # E2E with coverage
-ruff format .                     # Format code
-ruff check . --fix                # Lint + autofix
-alembic revision --autogenerate   # New migration
-alembic upgrade head              # Run migrations
-
-# Frontend (from frontend/)
-npm run dev                       # Dev server
-npm run build                     # Production build
-npm run lint                      # Lint
-npm run generate:api-types        # Generate types from backend OpenAPI
+# Quick reference
+cd .docker && docker compose up -d    # Start all services
+cd backend && pytest -v               # Run tests
+cd frontend && npm run dev            # Dev server
 ```
 
 ## VS Code
@@ -181,12 +111,6 @@ npm run generate:api-types        # Generate types from backend OpenAPI
 -   ✅ Tests: pytest with async fixtures
 -   ✅ Minimal: no business logic, easily customizable
 -   ✅ Future-proof: Built on web standards, no legacy dependencies
-
-## What's NOT Included
-
--   ❌ Makefile (use VS Code tasks or direct commands)
--   ❌ Authentication (add as needed)
--   ❌ Verbose docs (template is minimal by design)
 
 ## License
 

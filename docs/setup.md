@@ -1,6 +1,6 @@
-# Setup
+# Setup & Customization
 
-## Initial Customization
+## Initial Customization (Required)
 
 **Before first use**, customize the template:
 
@@ -8,7 +8,8 @@
 
 ```bash
 # Rename the SDK package
-mv backend/project_name backend/your-project-slug
+cd backend
+mv project_name your-project-slug
 ```
 
 ### 2. Update References
@@ -18,11 +19,13 @@ Search and replace throughout the codebase:
 -   `"project-name"` → `"your-project-slug"` in `tools/release_please/*.json`
 -   `from project_name` → `from your_project_slug` in Python imports
 -   `PROJECT_NAME = "FastAPI Monorepo"` → your project name in `backend/api/core/config.py`
+-   `frontend/package.json`: Update `name` field
 
-### 3. Configure Team
+### 3. Configure Team & Environment
 
 -   **`.github/CODEOWNERS`**: Add your GitHub handles
--   **`tools/release_please/*.json`**: Update package names
+-   **`backend/.env`**: Create from `.env.example` and set `SECRET_KEY`, `DATABASE_URL`
+-   **`frontend/.env`**: Create from `.env.example` and set `VITE_API_URL`
 
 ## Quick Start
 
@@ -142,6 +145,51 @@ SECRET_KEY=change-in-production
 VITE_API_URL=http://localhost:8000/v1
 ```
 
+## All Commands Reference
+
+### Docker (from .docker/)
+
+```bash
+docker compose up -d              # Start all services
+docker compose down               # Stop services
+docker compose down -v            # Stop and remove volumes
+docker compose logs -f [service]  # View logs
+docker compose up -d --build      # Rebuild and start
+docker compose --profile dev up   # Dev mode (hot reload)
+```
+
+### Backend (from backend/)
+
+```bash
+# Testing
+pytest -v                                    # Run all tests
+pytest api/tests/ -v                         # API tests only
+pytest project_name/tests/ -v               # SDK tests only
+pytest --cov=api --cov=project_name tests/   # E2E with coverage
+
+# Code quality
+ruff format .                     # Format code
+ruff check . --fix                # Lint + autofix
+
+# Database migrations
+alembic revision --autogenerate -m "Description"  # Create migration
+alembic upgrade head                              # Apply migrations
+alembic downgrade -1                              # Rollback one
+
+# Development
+uvicorn api.main:app --reload     # Start dev server
+```
+
+### Frontend (from frontend/)
+
+```bash
+npm run dev                       # Start dev server
+npm run build                     # Production build
+npm run preview                   # Preview production build
+npm run lint                      # Lint code
+npm run generate:api-types        # Generate TypeScript types from OpenAPI
+```
+
 ## Troubleshooting
 
 **Port conflicts**: Change ports in `.docker/docker-compose.yml`
@@ -151,3 +199,5 @@ VITE_API_URL=http://localhost:8000/v1
 **Python imports**: Ensure `PYTHONPATH=./backend` (VS Code sets automatically)
 
 **Module not found**: Delete `node_modules`, run `npm install`
+
+**Types out of sync**: Run `npm run generate:api-types` after backend changes
