@@ -24,7 +24,7 @@ services:
   backend:
     build:
       context: ../backend
-      dockerfile: Dockerfile
+      dockerfile: ../.docker/Dockerfile.backend
     container_name: monorepo-backend
     restart: unless-stopped
     ports:
@@ -62,7 +62,7 @@ services:
   frontend:
     build:
       context: ../frontend
-      dockerfile: Dockerfile
+      dockerfile: ../.docker/Dockerfile.frontend
     container_name: monorepo-frontend
     restart: unless-stopped
     ports:

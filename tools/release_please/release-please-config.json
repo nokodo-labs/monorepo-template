@@ -1,0 +1,58 @@
+{
+	"$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+	"prerelease-type": "rc",
+	"include-component-in-tag": false,
+	"prerelease": false,
+	"always-update": false,
+	"label": "release: pending",
+	"release-label": "release: tagged",
+	"extra-label": "bot,release",
+	"group-pull-request-title-pattern": "chore(release): release ${branch}",
+	"separate-pull-requests": true,
+	"pull-request-header": "## 🚀 Release Notes",
+	"changelog-sections": [
+		{ "type": "feat", "section": "✨ New Features" },
+		{ "type": "fix", "section": "🐛 Bug Fixes" },
+		{ "type": "perf", "section": "🔧 Improvements" },
+		{ "type": "refactor", "section": "🔧 Improvements" },
+		{ "type": "chore", "section": "🧹 Miscellaneous" },
+		{ "type": "style", "section": "🧹 Miscellaneous" },
+		{ "type": "deps", "section": "🧹 Miscellaneous" },
+		{ "type": "ci", "section": "♻️ Ops" },
+		{ "type": "ops", "section": "♻️ Ops" },
+		{ "type": "build", "section": "♻️ Ops" },
+		{ "type": "test", "section": "♻️ Ops" },
+		{ "type": "docs", "section": "📚 Documentation" },
+		{ "type": "revert", "section": "⏪ Reverts" }
+	],
+	"packages": {
+		".": {
+			"package-name": "project-name",
+			"pull-request-title-pattern": "chore(release): release project-name ${version}"
+		},
+		"backend/project-name": {
+			"package-name": "project-name",
+			"release-type": "python",
+			"include-component-in-tag": true,
+			"pull-request-title-pattern": "chore(release): release library ${version}",
+			"extra-label": "bot,backend",
+			"skip-changelog": true
+		},
+		"backend/api": {
+			"package-name": "api",
+			"release-type": "python",
+			"include-component-in-tag": true,
+			"pull-request-title-pattern": "chore(release): release API ${version}",
+			"extra-label": "bot,api",
+			"skip-changelog": true
+		},
+		"frontend": {
+			"package-name": "frontend",
+			"release-type": "node",
+			"include-component-in-tag": true,
+			"pull-request-title-pattern": "chore(release): release Frontend ${version}",
+			"extra-label": "bot,frontend",
+			"skip-changelog": true
+		}
+	}
+}

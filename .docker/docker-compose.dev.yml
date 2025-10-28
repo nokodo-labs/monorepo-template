@@ -3,7 +3,7 @@ services:
   backend:
     build:
       context: ../backend
-      dockerfile: Dockerfile
+      dockerfile: ../.docker/Dockerfile.backend
     environment:
       DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/app_db
       APP_ENV: development

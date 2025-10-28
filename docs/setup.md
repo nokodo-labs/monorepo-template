@@ -1,5 +1,29 @@
 # Setup
 
+## Initial Customization
+
+**Before first use**, customize the template:
+
+### 1. Rename Project Package
+
+```bash
+# Rename the SDK package
+mv backend/project_name backend/your-project-slug
+```
+
+### 2. Update References
+
+Search and replace throughout the codebase:
+
+-   `"project-name"` → `"your-project-slug"` in `tools/release_please/*.json`
+-   `from project_name` → `from your_project_slug` in Python imports
+-   `PROJECT_NAME = "FastAPI Monorepo"` → your project name in `backend/api/core/config.py`
+
+### 3. Configure Team
+
+-   **`.github/CODEOWNERS`**: Add your GitHub handles
+-   **`tools/release_please/*.json`**: Update package names
+
 ## Quick Start
 
 ```bash
@@ -11,7 +35,6 @@ Access:
 
 -   Frontend: http://localhost:5173
 -   Backend: http://localhost:8000
--   API Docs: http://localhost:8000/v1/docs
 
 ## Local Development
 

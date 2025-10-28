@@ -1,0 +1,58 @@
+{
+	"$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+	"prerelease-type": "rc",
+	"include-component-in-tag": false,
+	"prerelease": true,
+	"always-update": false,
+	"label": "prerelease: pending",
+	"release-label": "prerelease: tagged",
+	"extra-label": "bot,prerelease",
+	"group-pull-request-title-pattern": "chore(release): release ${branch}",
+	"separate-pull-requests": true,
+	"pull-request-header": "## 🚀 Release Notes\n\n> This is a prerelease (RC) version.",
+	"changelog-sections": [
+		{ "type": "feat", "section": "✨ New Features" },
+		{ "type": "fix", "section": "🐛 Bug Fixes" },
+		{ "type": "perf", "section": "🔧 Improvements" },
+		{ "type": "refactor", "section": "🔧 Improvements" },
+		{ "type": "chore", "section": "🧹 Miscellaneous" },
+		{ "type": "style", "section": "🧹 Miscellaneous" },
+		{ "type": "deps", "section": "🧹 Miscellaneous" },
+		{ "type": "ci", "section": "♻️ Ops" },
+		{ "type": "ops", "section": "♻️ Ops" },
+		{ "type": "build", "section": "♻️ Ops" },
+		{ "type": "test", "section": "♻️ Ops" },
+		{ "type": "docs", "section": "📚 Documentation" },
+		{ "type": "revert", "section": "⏪ Reverts" }
+	],
+	"packages": {
+		".": {
+			"package-name": "project-name",
+			"pull-request-title-pattern": "chore(release): prerelease project-name ${version} (rc)"
+		},
+		"backend/project-name": {
+			"package-name": "project-name",
+			"release-type": "python",
+			"include-component-in-tag": true,
+			"pull-request-title-pattern": "chore(release): prerelease library ${version} (rc)",
+			"extra-label": "bot,backend",
+			"skip-changelog": true
+		},
+		"backend/api": {
+			"package-name": "api",
+			"release-type": "python",
+			"include-component-in-tag": true,
+			"pull-request-title-pattern": "chore(release): prerelease API ${version} (rc)",
+			"extra-label": "bot,api",
+			"skip-changelog": true
+		},
+		"frontend": {
+			"package-name": "frontend",
+			"release-type": "node",
+			"include-component-in-tag": true,
+			"pull-request-title-pattern": "chore(release): prerelease Frontend ${version} (rc)",
+			"extra-label": "bot,frontend",
+			"skip-changelog": true
+		}
+	}
+}

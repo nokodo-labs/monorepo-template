@@ -12,6 +12,26 @@ Modern full-stack boilerplate: FastAPI backend + Svelte 5 frontend with containe
 
 ## Quick Start
 
+### 1. Customize Template
+
+**Required customizations** before using:
+
+```bash
+# 1. Rename project_name directory
+mv backend/project_name backend/your-project-name
+
+# 2. Update all references to "project-name" (search & replace):
+#    - tools/release_please/*.json: "project-name" → "your-project-name"
+#    - backend/project_name imports → your_project_name
+#    - .github/CODEOWNERS: Add your team handles
+
+# 3. Update project metadata
+#    - backend/api/core/config.py: PROJECT_NAME
+#    - frontend/package.json: name field
+```
+
+### 2. Start Services
+
 ```bash
 cd .docker
 docker compose up -d
@@ -41,12 +61,17 @@ frontend/
 ├── src/
 │   ├── lib/               # Components
 │   └── main.ts            # Entry point
-├── nginx.conf             # Production server
-└── Dockerfile             # Multi-stage build
+└── nginx.conf             # Production server
 
-.docker/                   # Docker Compose configs
+.docker/                   # Docker configs
+├── Dockerfile.backend     # Backend build
+├── Dockerfile.frontend    # Frontend build
+├── docker-compose.yml     # Production
+└── docker-compose.dev.yml # Development
+
+.github/                   # CI/CD, Dependabot, CODEOWNERS
 .vscode/                   # Editor config, tasks, debugger
-.github/                   # Copilot instructions
+tools/release_please/      # Release automation config
 ```
 
 ### Architecture
@@ -64,7 +89,12 @@ frontend/
 -   **OpenAPI types** - Auto-generated TypeScript types from FastAPI schema
 -   **Type safety** - Backend changes = compile errors in frontend if incompatible
 
-**Rename `project_name`**: Change directory name and update imports when starting a real project.
+**Customization Required Before Use:**
+
+1.  Rename `backend/project_name/` → `backend/your-project-slug/`
+2.  Search & replace `"project-name"` in `tools/release_please/*.json`
+3.  Configure `.github/CODEOWNERS` with your GitHub handles
+4.  Update `PROJECT_NAME` in `backend/api/core/config.py`
 
 ## Configuration
 

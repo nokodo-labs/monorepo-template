@@ -3,7 +3,7 @@
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-from api.api.v1.router import api_router
+from api.v1.router import api_router
 from api.core.config import settings
 from api.core.database import init_db
 from fastapi import FastAPI
