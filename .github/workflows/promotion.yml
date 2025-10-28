@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Check for differences between dev and stable
         id: diff
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { data } = await github.rest.repos.compareCommits({
