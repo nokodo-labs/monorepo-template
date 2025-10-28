@@ -3,6 +3,7 @@
 		// Python
 		"ms-python.python",
 		"ms-python.vscode-pylance",
+		"ms-python.debugpy",
 		"charliermarsh.ruff",
 
 		// JavaScript/TypeScript/Svelte
@@ -11,24 +12,30 @@
 		"esbenp.prettier-vscode",
 		"dbaeumer.vscode-eslint",
 
+		// YAML
+		"redhat.vscode-yaml",
+
 		// Docker
-		"ms-azuretools.vscode-docker",
+		"ms-azuretools.vscode-containers",
+		"ms-vscode-remote.remote-containers",
+		"docker.docker",
 
 		// Database
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-pg",
 
-		// Git
+		// Git & GitHub
+		"eamodio.gitlens",
+		"github.vscode-github-actions",
 		"eamodio.gitlens",
 
 		// AI Assistants
 		"github.copilot",
 		"github.copilot-chat",
+		"ms-vscode.vscode-websearchforcopilot",
+		"anthropic.claude-code",
 
 		// Utilities
-		"editorconfig.editorconfig",
-		"usernamehw.errorlens",
-		"christian-kohler.path-intellisense",
 		"visualstudioexptteam.vscodeintellicode",
 		"gruntfuggly.todo-tree"
 	]

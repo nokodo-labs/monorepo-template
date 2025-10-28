@@ -60,6 +60,9 @@
 	"[jsonc]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 
 	// Svelte
 	"svelte.enable-ts-plugin": true,
@@ -68,10 +71,18 @@
 	"tailwindCSS.experimental.classRegex": [
 		["class:\\s*?[\"'`]([^\"'`]*).*?[\"'`]", "[\"'`]([^\"'`]*).*?[\"'`]"]
 	],
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
 
 	// Docker
-	"docker.commands.build": "${containerCommand} build --pull --rm -f \"${dockerfile}\" -t ${tag} \"${context}\"",
-	"docker.commands.compose": "docker compose",
+	"containers.commands.build": "${containerCommand} build --pull --rm -f \"${dockerfile}\" -t ${tag} \"${context}\"",
+	"containers.commands.composeUp": [
+		{
+			"label": "Compose Up",
+			"template": "${composeCommand} ${configurationFile} up ${detached} ${build}"
+		}
+	],
 
 	// Search
 	"search.exclude": {
