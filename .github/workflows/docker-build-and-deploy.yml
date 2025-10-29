@@ -3,11 +3,6 @@ name: Docker Build and Deploy
 on:
   workflow_call:
     inputs:
-      python_version:
-        type: string
-        description: "Python version to use for the workflow"
-        required: false
-        default: "3.13"
       release_version:
         type: string
         description: "Release version if a release happened (empty = no release)"
@@ -23,7 +18,7 @@ on:
         type: string
         description: "Python version to use for the workflow"
         required: false
-        default: "3.13"
+        default: ""
 
 jobs:
   build-and-deploy:
@@ -40,9 +35,23 @@ jobs:
         id: set_python_version
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "PYTHON_VERSION=${{ github.event.inputs.python-version }}" >> $GITHUB_OUTPUT
+            if [ -n "${{ github.event.inputs.python-version }}" ]; then
+              echo "PYTHON_VERSION=${{ github.event.inputs.python-version }}" >> $GITHUB_OUTPUT
+            elif [ -f backend/.python-version ]; then
+              ver=$(cat backend/.python-version | tr -d '\r' | head -n1)
+              echo "PYTHON_VERSION=$ver" >> $GITHUB_OUTPUT
+            else
+              echo "Error: backend/.python-version not found and no input provided" >&2
+              exit 1
+            fi
           else
-            echo "PYTHON_VERSION=${{ inputs.python_version }}" >> $GITHUB_OUTPUT
+            if [ -f backend/.python-version ]; then
+              ver=$(cat backend/.python-version | tr -d '\r' | head -n1)
+              echo "PYTHON_VERSION=$ver" >> $GITHUB_OUTPUT
+            else
+              echo "Error: backend/.python-version not found" >&2
+              exit 1
+            fi
           fi
 
       - name: Set branch and commit info

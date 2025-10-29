@@ -7,11 +7,6 @@ on:
   push:
     branches: [dev, production, stable]
   workflow_dispatch:
-    inputs:
-      python_version:
-        description: "Python version to use for the workflow"
-        required: false
-        default: ""
 
 jobs:
   detect-changes:
@@ -26,7 +21,6 @@ jobs:
       frontend: ${{ steps.changes.outputs.frontend }}
       docker: ${{ steps.changes.outputs.docker }}
       github_actions: ${{ steps.changes.outputs.github_actions }}
-      python_version: ${{ steps.python_version.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -49,30 +43,12 @@ jobs:
             release:
               - 'tools/release_please/**'
 
-      - name: Detect Python Version
-        id: python_version
-        run: |
-          input_python_version="${{ github.event.inputs.python_version }}"
-          if [ -n "$input_python_version" ]; then
-            python_version="$input_python_version"
-            echo "Using manually supplied Python version: $python_version"
-          elif [ -f backend/.python-version ]; then
-            python_version=$(cat backend/.python-version | tr -d '\r' | head -n1)
-            echo "Using stable Python version from .python-version: $python_version"
-          else
-            echo "Error: .python-version file missing and no input provided." >&2
-            exit 1
-          fi
-          echo "version=$python_version" >> $GITHUB_OUTPUT
-
   backend-ci:
     name: Backend CI
     needs: detect-changes
     if: needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.github_actions == 'true'
     uses: ./.github/workflows/backend-ci.yml
     secrets: inherit
-    with:
-      python_version: ${{ needs.detect-changes.outputs.python_version }}
 
   frontend-ci:
     name: Frontend CI
@@ -102,7 +78,6 @@ jobs:
     uses: ./.github/workflows/docker-build-and-deploy.yml
     secrets: inherit
     with:
-      python_version: ${{ needs.detect-changes.outputs.python_version }}
       release_version: ${{ needs.release.outputs.version }}
 
   pages-deploy:
