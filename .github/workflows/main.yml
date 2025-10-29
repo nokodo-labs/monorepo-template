@@ -104,3 +104,24 @@ jobs:
     with:
       python_version: ${{ needs.detect-changes.outputs.python_version }}
       release_version: ${{ needs.release.outputs.version }}
+
+  pages-deploy:
+    name: Deploy Frontend to GitHub Pages
+    needs: [detect-changes, frontend-ci, release]
+    if: >-
+      ${{ !cancelled() &&
+          (needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true') &&
+          (
+            github.event_name == 'pull_request' ||
+            (github.event_name == 'push' && (github.ref_name == 'production' || github.ref_name == 'stable'))
+          )
+      }}
+    uses: ./.github/workflows/deploy-frontend-pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      pull-requests: write
+    secrets: inherit
+    with:
+      environment: github-pages

@@ -2,6 +2,8 @@
     import { api } from './lib/api/index'
 
     let health = $state<{ status: string } | null>(null)
+    const IS_PAGES =
+        typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_PAGES === 'true'
 
     async function checkHealth() {
         try {
@@ -14,6 +16,11 @@
     }
 
     $effect(() => {
+        if (IS_PAGES) {
+            // On static Pages we don't have a backend; mark as healthy/demo
+            health = { status: 'pages' }
+            return
+        }
         console.log('Starting health checks...')
         checkHealth()
     })
@@ -168,16 +175,18 @@
                     {#if health}
                         <div
                             class="group relative flex items-center gap-2 rounded-full bg-green-500/10 px-2.5 py-1.5 text-xs font-medium text-green-400 ring-1 ring-green-500/30 backdrop-blur-sm transition-all hover:ring-green-500/50 sm:text-sm"
-                            title="API server is running and healthy"
+                            title={IS_PAGES
+                                ? 'Static preview (no backend polling)'
+                                : 'API server is running and healthy'}
                         >
                             <div
                                 class="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500 shadow-lg shadow-green-500/50 sm:h-2 sm:w-2"
                             ></div>
-                            <span class="lowercase">online</span>
+                            <span class="lowercase">{IS_PAGES ? 'preview' : 'online'}</span>
                             <div
                                 class="pointer-events-none absolute right-0 -bottom-12 z-50 hidden w-48 rounded-lg bg-zinc-900 px-3 py-2 text-xs font-normal text-zinc-300 opacity-0 shadow-xl ring-1 ring-zinc-700 transition-opacity group-hover:block group-hover:opacity-100"
                             >
-                                API health check passed
+                                {IS_PAGES ? 'Static site preview' : 'API health check passed'}
                             </div>
                         </div>
                     {:else}
