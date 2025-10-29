@@ -28,10 +28,10 @@
 	],
 	"packages": {
 		".": {
-			"package-name": "project-name",
+			"package-name": "project-slug",
 			"pull-request-title-pattern": "chore${scope}: prerelease${component} project-title v${version}"
 		},
-		"backend/project-name": {
+		"backend/project-slug": {
 			"package-name": "library",
 			"release-type": "python",
 			"include-component-in-tag": true,

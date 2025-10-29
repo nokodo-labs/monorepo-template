@@ -25,7 +25,7 @@
 
 ### 1. Customize Template
 
-**First time setup**: Rename `backend/project_name/` and update references. See [docs/setup.md](docs/setup.md) for details.
+**First time setup**: Rename `backend/project_slug/` and update references. See [docs/setup.md](docs/setup.md) for details.
 
 ### 2. Start Services
 
@@ -55,7 +55,7 @@ backend/
 │   ├── models/            # SQLAlchemy ORM
 │   ├── schemas/           # Pydantic validation
 │   └── tests/             # API & ORM tests
-├── project_name/          # SDK/service layer (rename me!)
+├── project_slug/          # SDK/service layer (rename me!)
 │   └── tests/             # SDK unit tests (optional)
 ├── tests/                 # E2E integration tests
 ├── data/                  # Data storage (volume mounted)
@@ -83,8 +83,8 @@ tools/release_please/      # Release automation config
 **Backend:**
 
 -   **`api/`**: FastAPI app, routes, ORM, database setup
--   **`project_name/`**: Business logic SDK that can be packaged separately for pip distribution
--   **Testing**: 3 tiers (API tests in `api/tests/`, SDK tests in `project_name/tests/`, E2E in `tests/`)
+-   **`project_slug/`**: Business logic SDK that can be packaged separately for pip distribution
+-   **Testing**: 3 tiers (API tests in `api/tests/`, SDK tests in `project_slug/tests/`, E2E in `tests/`)
 -   **URLs**: `/v1/users` (no `/api` prefix - deploy on `api.yourdomain.com`)
 
 **Frontend:**

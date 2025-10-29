@@ -11,15 +11,16 @@ After creating your repository from this template, customize the project:
 ```bash
 # Rename the SDK package
 cd backend
-mv project_name your-project-slug
+mv project_slug your-project-slug
 ```
 
 ### 2. Update References
 
 Search and replace throughout the codebase:
 
--   `"project-name"` → `"your-project-slug"` in `tools/release_please/*.json`
--   `from project_name` → `from your_project_slug` in Python imports
+-   `"project-title"` → `"Your Full Project Title"` (used in documentation headers and release PR titles)
+-   `"project-slug"` → `"your-project-slug"` in `tools/release_please/*.json`
+-   `from project_slug` → `from your_project_slug` in Python imports
 -   `PROJECT_NAME = "FastAPI Monorepo"` → your project name in `backend/api/core/config.py`
 -   `frontend/package.json`: Update `name` field
 
@@ -167,8 +168,8 @@ docker compose --profile dev up   # Dev mode (hot reload)
 # Testing
 pytest -v                                    # Run all tests
 pytest api/tests/ -v                         # API tests only
-pytest project_name/tests/ -v               # SDK tests only
-pytest --cov=api --cov=project_name tests/   # E2E with coverage
+pytest project_slug/tests/ -v               # SDK tests only
+pytest --cov=api --cov=project_slug tests/   # E2E with coverage
 
 # Code quality
 ruff format .                     # Format code

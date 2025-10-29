@@ -34,7 +34,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["api*", "project_name*"]
+include = ["api*", "project_slug*"]
 
 [tool.ruff]
 line-length = 100
