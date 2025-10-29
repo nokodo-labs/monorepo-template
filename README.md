@@ -38,6 +38,13 @@ docker compose up -d
 -   Backend API: http://localhost:8000
 -   API Docs: http://localhost:8000/v1/docs
 
+Deploys:
+
+-   GitHub Pages via pipeline (PR previews + production/stable publishes)
+-   Custom domain supported (CNAME to `<user>.github.io`)
+
+On Pages the header status shows `preview` (no API polling).
+
 ## Structure
 
 ```
@@ -91,6 +98,8 @@ tools/release_please/      # Release automation config
 ## Configuration
 
 See [docs/setup.md](docs/setup.md) for environment variable setup and configuration details.
+
+To use this as your own starter: click “Use this template” on GitHub, create your repo, then follow [docs/setup.md](docs/setup.md).
 
 ## Commands
 

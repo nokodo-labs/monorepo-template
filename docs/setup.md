@@ -1,8 +1,10 @@
 # Setup & Customization
 
+These steps are for developers who created a new repository using the “Use this template” button from this template.
+
 ## Initial Customization (Required)
 
-**Before first use**, customize the template:
+After creating your repository from this template, customize the project:
 
 ### 1. Rename Project Package
 
@@ -49,7 +51,7 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1  # Windows
 pip install -e .[dev]
 cp .env.example .env
-uvicorn app.main:app --reload
+uvicorn api.main:app --reload
 ```
 
 ### Frontend
@@ -143,6 +145,7 @@ SECRET_KEY=change-in-production
 
 ```
 VITE_API_URL=http://localhost:8000/v1
+VITE_PAGES=false
 ```
 
 ## All Commands Reference
@@ -199,5 +202,12 @@ npm run generate:api-types        # Generate TypeScript types from OpenAPI
 **Python imports**: Ensure `PYTHONPATH=./backend` (VS Code sets automatically)
 
 **Module not found**: Delete `node_modules`, run `npm install`
+
+## Using this Template
+
+1. Click “Use this template” on GitHub and create your new repository
+2. Clone your new repository locally
+3. Follow the steps in “Initial Customization” above
+4. Push your changes; your CI/CD will run and GitHub Pages (via the pipeline) will publish previews for PRs and deploy on `production`/`stable`
 
 **Types out of sync**: Run `npm run generate:api-types` after backend changes
