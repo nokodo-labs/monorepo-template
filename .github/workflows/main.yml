@@ -21,6 +21,7 @@ jobs:
       frontend: ${{ steps.changes.outputs.frontend }}
       docker: ${{ steps.changes.outputs.docker }}
       github_actions: ${{ steps.changes.outputs.github_actions }}
+      docs: ${{ steps.changes.outputs.docs }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -40,6 +41,8 @@ jobs:
               - '.docker/**'
             github_actions:
               - '.github/workflows/**'
+            docs:
+              - 'docs/**'
             release:
               - 'tools/release_please/**'
 
@@ -100,3 +103,25 @@ jobs:
     secrets: inherit
     with:
       environment: github-pages
+
+  promotion:
+    name: Promote Dev to Stable
+    needs: [detect-changes, backend-ci, frontend-ci, release]
+    if: >-
+      ${{ !cancelled() &&
+          github.event_name == 'push' &&
+          github.ref_type == 'branch' &&
+          github.ref_name == 'dev' &&
+          (
+            needs.detect-changes.outputs.backend == 'true' ||
+            needs.detect-changes.outputs.frontend == 'true' ||
+            needs.detect-changes.outputs.github_actions == 'true' ||
+            needs.detect-changes.outputs.docs == 'true'
+          ) &&
+          (
+            (needs.backend-ci.result == 'success' || needs.backend-ci.result == 'skipped') &&
+            (needs.frontend-ci.result == 'success' || needs.frontend-ci.result == 'skipped')
+          )
+      }}
+    uses: ./.github/workflows/promotion.yml
+    secrets: inherit
