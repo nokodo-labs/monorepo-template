@@ -8,6 +8,7 @@
 	"release-label": "release: tagged",
 	"extra-label": "bot,release",
 	"group-pull-request-title-pattern": "chore(release): release ${branch}",
+	"pull-request-title-pattern": "chore${scope}: release${component} v${version}",
 	"separate-pull-requests": true,
 	"pull-request-header": "## 🚀 Release Notes",
 	"changelog-sections": [
@@ -31,27 +32,24 @@
 			"pull-request-title-pattern": "chore(release): release project-name ${version}"
 		},
 		"backend/project-name": {
-			"package-name": "project-name",
+			"package-name": "library",
 			"release-type": "python",
 			"include-component-in-tag": true,
-			"pull-request-title-pattern": "chore(release): release library ${version}",
-			"extra-label": "bot,backend",
+			"extra-label": "bot,backend,release",
 			"skip-changelog": true
 		},
 		"backend/api": {
 			"package-name": "api",
 			"release-type": "python",
 			"include-component-in-tag": true,
-			"pull-request-title-pattern": "chore(release): release API ${version}",
-			"extra-label": "bot,api",
+			"extra-label": "bot,api,release",
 			"skip-changelog": true
 		},
 		"frontend": {
 			"package-name": "frontend",
 			"release-type": "node",
 			"include-component-in-tag": true,
-			"pull-request-title-pattern": "chore(release): release Frontend ${version}",
-			"extra-label": "bot,frontend",
+			"extra-label": "bot,frontend,release",
 			"skip-changelog": true
 		}
 	}
