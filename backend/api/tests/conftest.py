@@ -8,12 +8,15 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from api.core.database import Base, get_db
-from api.main import app
+from api.core.config import settings
+from api.core.database import Base
 
 
-# Test database URL (use a separate test database)
-TEST_DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/test_db"
+# Configure settings for tests before importing the app
+settings.TESTING = True
+
+# Test database URL (use a separate sqlite database for CI)
+TEST_DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 
 
 @pytest.fixture(scope="session")
@@ -57,6 +60,10 @@ async def db_session() -> AsyncGenerator[AsyncSession]:
 @pytest.fixture(scope="function")
 async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient]:
 	"""Create a test client with overridden database dependency."""
+
+	# Import after TESTING flag is set to avoid startup DB init
+	from api.core.database import get_db
+	from api.main import app
 
 	async def override_get_db() -> AsyncGenerator[AsyncSession]:
 		yield db_session

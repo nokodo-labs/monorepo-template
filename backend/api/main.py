@@ -14,8 +14,11 @@ from api.v1.router import api_router
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
 	"""Application lifespan events."""
-	# Startup
-	await init_db()
+	# Startup: skip DB init during tests
+	from api.core.config import settings
+
+	if not settings.TESTING:
+		await init_db()
 	yield
 	# Shutdown
 	# Add cleanup logic here if needed

@@ -2,7 +2,7 @@
 
 from typing import Literal
 
-from pydantic import PostgresDsn, field_validator
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -27,7 +27,11 @@ class Settings(BaseSettings):
 	SECRET_KEY: str = "changeme"
 
 	# Database
-	DATABASE_URL: PostgresDsn
+	# Provide a safe default for dev/CI; env can override to Postgres in real deployments
+	DATABASE_URL: str = "sqlite+aiosqlite:///./app.db"
+
+	# Testing
+	TESTING: bool = False
 
 	# CORS
 	CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
@@ -38,6 +42,16 @@ class Settings(BaseSettings):
 		"""Parse CORS origins from string or list."""
 		if isinstance(v, str):
 			return [origin.strip() for origin in v.split(",")]
+		return v
+
+	@field_validator("DATABASE_URL")
+	@classmethod
+	def validate_database_url(cls, v: str) -> str:
+		"""Ensure supported DB URL schemes only."""
+		allowed = {"postgresql", "postgresql+psycopg", "sqlite+aiosqlite"}
+		scheme = v.split(":", 1)[0]
+		if scheme not in allowed:
+			raise ValueError(f"Unsupported DATABASE_URL scheme: {scheme}")
 		return v
 
 
