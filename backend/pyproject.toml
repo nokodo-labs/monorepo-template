@@ -48,7 +48,9 @@ select = [
 	"W",   # pycodestyle warnings
 	"UP",  # pyupgrade
 ]
-ignore = []
+ignore = [
+    "W191",  # allow tabs for indentation
+]
 
 [tool.ruff.format]
 quote-style = "double"

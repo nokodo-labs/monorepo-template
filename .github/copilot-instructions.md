@@ -55,7 +55,9 @@ frontend/src/
 │   │   ├── types.ts        # OpenAPI-generated types
 │   │   └── index.ts        # Typed API functions
 │   └── [components]        # Svelte components
-└── main.ts                 # Entry
+├── main.ts                 # Entry
+├── App.svelte              # Main Svelte app
+└── app.css                 # Global styles (TailwindCSS)
 ```
 
 ## Patterns
@@ -71,8 +73,25 @@ frontend/src/
 -   Three-tier testing: API tests, SDK tests, E2E tests
 -   API changes: Update backend → run `npm run generate:api-types` → types sync
 
+## AI Agent Behavior
+
+### General Guidelines
+
+When interacting with the user and working, always **keep comms efficient** and concise.
+
+As an AI, your context is limited, thus overly verbose responses will directly affect how your performance degrades over time.
+**Less is more** - focus on addressing the user's needs never create extra files or documentation to report changes unless explicitly asked.
+
+### Running Code
+
+When the user asks you to run code, always:
+
+-   **For backend code**: Always remember to cd into `backend/`. Always enable the virtual environment.
+-   **For frontend code**: Always remember to cd into `frontend/`.
+-   Check the current working directory if unsure where you are.
+-   Check terminal output if unsure whether the venv is activated.
+
 ## Extended Instructions
 
-Additional domain-specific `.instructions.md` files are available in `.github/instructions/` directory. These files use YAML frontmatter with `applyTo` patterns to automatically apply when editing specific file types. You can also manually attach them via Chat → Add Context → Instructions.
-
-Examples: Python patterns, TypeScript conventions, API guidelines, database patterns, etc.
+Additional domain-specific `.instructions.md` files can be created in the `.github/instructions/` directory. These files use YAML frontmatter with `applyTo` patterns to automatically apply when editing specific file types. The user can also manually attach them via Chat → Add Context → Instructions.
+See readme in the `.github/instructions/` directory for more details.

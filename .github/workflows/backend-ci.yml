@@ -29,10 +29,10 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version-file: backend/.python-version
-      - name: Install Formatting Tools
+      - name: Install Dev Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff==0.14.0
+          pip install -e .[dev]
       - name: Check Code Formatting
         run: ruff check .
       - name: Check Import Sorting
@@ -53,10 +53,10 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version-file: backend/.python-version
-      - name: Install Linting Tools
+      - name: Install Dev Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff==0.14.0
+          pip install -e .[dev]
       - name: Lint Code
         run: ruff check . --output-format=github
 

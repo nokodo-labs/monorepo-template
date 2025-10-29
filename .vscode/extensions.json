@@ -20,10 +20,6 @@
 		"ms-vscode-remote.remote-containers",
 		"docker.docker",
 
-		// Database
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg",
-
 		// Git & GitHub
 		"eamodio.gitlens",
 		"github.vscode-github-actions",

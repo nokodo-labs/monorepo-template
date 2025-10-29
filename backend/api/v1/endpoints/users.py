@@ -1,12 +1,14 @@
 """User endpoints."""
 
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from api.core.database import get_db
 from api.models.user import User
 from api.schemas.user import User as UserSchema
 from api.schemas.user import UserCreate
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+
 
 router = APIRouter()
 
@@ -30,13 +32,13 @@ async def read_user(
     """Get user by ID."""
     result = await db.execute(select(User).where(User.id == user_id))
     user = result.scalar_one_or_none()
-    
+
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found",
         )
-    
+
     return user
 
 
@@ -54,9 +56,9 @@ async def create_user(
         is_active=user_in.is_active,
         is_superuser=user_in.is_superuser,
     )
-    
+
     db.add(user)
     await db.commit()
     await db.refresh(user)
-    
+
     return user
