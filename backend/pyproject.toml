@@ -6,7 +6,7 @@ requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.32.0",
-    "pydantic>=2.9.0",
+    "pydantic[email]>=2.9.0",
     "pydantic-settings>=2.5.0",
     "sqlalchemy>=2.0.35",
     "psycopg[binary]>=3.2.3",
@@ -30,6 +30,10 @@ dev = [
 [build-system]
 requires = ["setuptools>=75.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["api*", "project_name*"]
 
 [tool.ruff]
 line-length = 100

@@ -1,6 +1,7 @@
 """Pytest configuration and fixtures."""
 
 import asyncio
+import sys
 from collections.abc import AsyncGenerator, Generator
 from typing import Any
 
@@ -17,6 +18,9 @@ TEST_DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/test_
 @pytest.fixture(scope="session")
 def event_loop() -> Generator[asyncio.AbstractEventLoop, None, None]:
     """Create an instance of the default event loop for the test session."""
+    # Use SelectorEventLoop on Windows for psycopg compatibility
+    if sys.platform == "win32":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
