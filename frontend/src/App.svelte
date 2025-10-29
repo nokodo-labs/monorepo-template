@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { api } from '$lib/api/index'
+    import { api } from './lib/api/index.ts'
 
     let health = $state<{ status: string } | null>(null)
     const IS_PAGES = typeof import.meta !== 'undefined' && import.meta.env?.VITE_PAGES === 'true'

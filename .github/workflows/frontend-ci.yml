@@ -6,7 +6,7 @@ on:
 
 jobs:
   quality:
-    name: Frontend Quality (Node from .nvmrc)
+    name: Check Frontend Quality
     runs-on: ubuntu-latest
     defaults:
       run:
