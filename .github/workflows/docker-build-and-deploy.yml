@@ -124,7 +124,7 @@ jobs:
         run: |
           for tag in ${{ steps.determine_tags.outputs.TAGS }}; do
             echo "Tagging with: $tag"
-            docker tag run_for_glory $tag
+            docker tag ${{ github.event.repository.name }} $tag
           done
 
       - name: Push the Docker image
