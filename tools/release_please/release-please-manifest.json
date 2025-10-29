@@ -1,6 +1,6 @@
 {
 	".": "0.0.1",
 	"backend/project-name": "0.0.1",
-	"backend/api": "0.0.1",
+	"backend/api": "0.1.0",
 	"frontend": "0.0.1"
 }
