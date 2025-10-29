@@ -1,6 +1,17 @@
+<div align="center">
+
 # Monorepo Template
 
-Modern full-stack boilerplate: FastAPI backend + Svelte 5 frontend with containerization, VS Code support, and AI integrations.
+**Modern full-stack boilerplate: FastAPI backend + Svelte 5 frontend with containerization, VS Code support, and AI integrations.**
+
+[![License](https://img.shields.io/github/license/nokodo-labs/monorepo-template)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/nokodo-labs/monorepo-template?style=social)](https://github.com/nokodo-labs/monorepo-template/stargazers)
+[![Issues](https://img.shields.io/github/issues/nokodo-labs/monorepo-template)](https://github.com/nokodo-labs/monorepo-template/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/nokodo-labs/monorepo-template)](https://github.com/nokodo-labs/monorepo-template/pulls)
+[![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
+[![Node](https://img.shields.io/badge/node-24+-green.svg)](https://nodejs.org/)
+
+</div>
 
 ## Stack
 
@@ -114,4 +125,4 @@ cd frontend && npm run dev            # Dev server
 
 ## License
 
-MIT
+BSD 3-Clause - See [LICENSE](LICENSE) for details.
