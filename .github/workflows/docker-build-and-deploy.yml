@@ -68,7 +68,7 @@ jobs:
           fi
 
       - name: Build image
-        run: docker build . --file .docker/Dockerfile.backend --tag project-name --build-arg PYTHON_VERSION=${{ steps.set_python_version.outputs.PYTHON_VERSION }}
+        run: docker build backend --file .docker/Dockerfile.backend --tag project-name --build-arg PYTHON_VERSION=${{ steps.set_python_version.outputs.PYTHON_VERSION }}
 
       - name: Log in to GHCR
         uses: docker/login-action@v3

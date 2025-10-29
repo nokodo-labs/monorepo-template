@@ -2,8 +2,7 @@
     import { api } from './lib/api/index'
 
     let health = $state<{ status: string } | null>(null)
-    const IS_PAGES =
-        typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_PAGES === 'true'
+    const IS_PAGES = typeof import.meta !== 'undefined' && import.meta.env?.VITE_PAGES === 'true'
 
     async function checkHealth() {
         try {
