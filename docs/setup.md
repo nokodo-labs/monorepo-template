@@ -39,7 +39,7 @@ docker compose up -d
 
 Access:
 
--   Frontend: http://localhost:5173
+-   Frontend: http://localhost (Nginx)
 -   Backend: http://localhost:8000
 
 ## Local Development
