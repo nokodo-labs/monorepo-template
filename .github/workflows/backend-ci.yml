@@ -79,7 +79,7 @@ jobs:
       matrix:
         python:
           - file
-          - "3.14.x"
+          - "3.14"
     continue-on-error: ${{ matrix.python != 'file' }}
     defaults:
       run:
