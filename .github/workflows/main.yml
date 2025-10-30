@@ -98,7 +98,7 @@ jobs:
       environment: github-pages
 
   promotion:
-    name: Promote Dev to Stable
+    name: Code Promotion
     needs: [detect-changes, backend-ci, frontend-ci, release]
     if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name == 'dev' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true' || needs.detect-changes.outputs.docs == 'true') && ((needs.backend-ci.result == 'success' || needs.backend-ci.result == 'skipped') && (needs.frontend-ci.result == 'success' || needs.frontend-ci.result == 'skipped')) }}
     uses: ./.github/workflows/promotion.yml
