@@ -51,6 +51,9 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.github_actions == 'true'
     uses: ./.github/workflows/backend-ci.yml
+    with:
+      run_tests: true
+      run_lint: true
     secrets: inherit
 
   frontend-ci:
@@ -58,6 +61,9 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true'
     uses: ./.github/workflows/frontend-ci.yml
+    with:
+      run_tests: true
+      run_lint: true
     secrets: inherit
 
   release:
