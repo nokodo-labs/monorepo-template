@@ -49,8 +49,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_API_URL: ${{ inputs.vite_api_url || vars.VITE_API_URL || '' }}
-          # Mark this as a Pages build so UI disables API polling
+          VITE_API_URL: ${{ inputs.vite_api_url || '' }}
           VITE_PAGES: "true"
         run: npm run build
 
