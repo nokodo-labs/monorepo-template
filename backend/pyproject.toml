@@ -15,6 +15,7 @@ dependencies = [
     "python-jose[cryptography]>=3.3.0",
     "passlib[bcrypt]>=1.7.4",
     "python-dotenv>=1.0.1",
+    "greenlet>=3.0.0",
 ]
 
 [project.optional-dependencies]
@@ -29,12 +30,11 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=75.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["api*", "project_slug*"]
+[tool.hatch.build.targets.wheel]
+packages = ["api", "project_slug"]
 
 [tool.ruff]
 line-length = 100

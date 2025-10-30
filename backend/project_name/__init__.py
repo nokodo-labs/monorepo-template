@@ -5,7 +5,7 @@ IMPORTANT: Rename this package from 'project_slug' to your actual project name.
 
 This package contains business logic, services, and utilities that are independent
 of the FastAPI application layer. It can be packaged separately and distributed
-via pip, allowing other projects to import and use this logic without the web layer.
+via pip/uv/PyPI, allowing other projects to import and use this logic without the web layer.
 
 Example usage after renaming to 'myproject':
 	from myproject import some_service

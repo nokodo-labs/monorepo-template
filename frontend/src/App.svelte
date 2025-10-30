@@ -303,14 +303,14 @@
                                 <button
                                     onclick={(e) =>
                                         copyToClipboard(
-                                            'cd ../backend && pip install -e .[dev]\ncd ../frontend && npm install',
+                                            'cd ../backend && uv sync --all-extras\ncd ../frontend && npm install',
                                             e.currentTarget
                                         )}
                                     class="absolute top-3 right-3 z-10 rounded border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-zinc-400 shadow-lg transition-all hover:border-zinc-600 hover:bg-zinc-700 hover:text-white"
                                     >copy</button
                                 >
                                 <div class="whitespace-nowrap">
-                                    cd ../backend && pip install -e .[dev]
+                                    cd ../backend && uv sync --all-extras
                                 </div>
                                 <div class="mt-1 whitespace-nowrap">
                                     cd ../frontend && npm install
@@ -336,14 +336,14 @@
                                 <button
                                     onclick={(e) =>
                                         copyToClipboard(
-                                            'uvicorn api.main:app --reload\nnpm run dev',
+                                            'uv run uvicorn api.main:app --reload\nnpm run dev',
                                             e.currentTarget
                                         )}
                                     class="absolute top-3 right-3 z-10 rounded border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-zinc-400 shadow-lg transition-all hover:border-zinc-600 hover:bg-zinc-700 hover:text-white"
                                     >copy</button
                                 >
                                 <div class="whitespace-nowrap">
-                                    backend: uvicorn api.main:app --reload
+                                    backend: uv run uvicorn api.main:app --reload
                                 </div>
                                 <div class="mt-1 whitespace-nowrap">frontend: npm run dev</div>
                             </div>
