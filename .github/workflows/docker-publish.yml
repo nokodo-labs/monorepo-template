@@ -1,4 +1,4 @@
-name: Docker Build and Deploy
+name: Build and Publish Docker Image
 
 on:
   workflow_call:
@@ -21,8 +21,8 @@ on:
         default: ""
 
 jobs:
-  build-and-deploy:
-    name: Build container and deploy to registries
+  build-and-push:
+    name: Build and push container image
     runs-on: ubuntu-latest
     permissions:
       packages: write

@@ -71,21 +71,16 @@ jobs:
       pull-requests: write
       packages: write
 
-  docker-build-and-deploy:
-    name: Docker build and Deploy
-    needs: [detect-changes, backend-ci, frontend-ci, release]
-    permissions:
-      contents: read
-      packages: write
-    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != 'stable' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.docker == 'true') || needs.release.outputs.version != '' || needs.detect-changes.outputs.github_actions == 'true' }}
-    uses: ./.github/workflows/docker-build-and-deploy.yml
+  promotion:
+    name: Code Promotion
+    needs: [detect-changes, backend-ci, frontend-ci]
+    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name == 'dev' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true' || needs.detect-changes.outputs.docs == 'true') && ((needs.backend-ci.result == 'success' || needs.backend-ci.result == 'skipped') && (needs.frontend-ci.result == 'success' || needs.frontend-ci.result == 'skipped')) }}
+    uses: ./.github/workflows/promotion.yml
     secrets: inherit
-    with:
-      release_version: ${{ needs.release.outputs.version }}
 
   pages-deploy:
     name: Deploy Frontend to GitHub Pages
-    needs: [detect-changes, frontend-ci, release]
+    needs: [detect-changes, frontend-ci]
     if: ${{ !cancelled() && (needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true') && (github.event_name == 'pull_request' || (github.event_name == 'push' && (github.ref_name == 'production' || github.ref_name == 'stable'))) }}
     uses: ./.github/workflows/deploy-frontend-pages.yml
     permissions:
@@ -97,9 +92,14 @@ jobs:
     with:
       environment: github-pages
 
-  promotion:
-    name: Code Promotion
+  docker-publish:
+    name: Build and Publish Docker Image
     needs: [detect-changes, backend-ci, frontend-ci, release]
-    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name == 'dev' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true' || needs.detect-changes.outputs.docs == 'true') && ((needs.backend-ci.result == 'success' || needs.backend-ci.result == 'skipped') && (needs.frontend-ci.result == 'success' || needs.frontend-ci.result == 'skipped')) }}
-    uses: ./.github/workflows/promotion.yml
+    permissions:
+      contents: read
+      packages: write
+    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != 'stable' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.docker == 'true') || needs.release.outputs.version != '' || needs.detect-changes.outputs.github_actions == 'true' }}
+    uses: ./.github/workflows/docker-publish.yml
     secrets: inherit
+    with:
+      release_version: ${{ needs.release.outputs.version }}
