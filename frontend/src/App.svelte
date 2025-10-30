@@ -24,7 +24,9 @@
         checkHealth()
     })
 
-    async function copyToClipboard(text: string, button: HTMLButtonElement) {
+    async function copyToClipboard(text: string, target: EventTarget | null) {
+        if (!target || !(target instanceof HTMLButtonElement)) return
+        const button = target
         await navigator.clipboard.writeText(text)
         const original = button.textContent
         button.textContent = '✓'
@@ -124,7 +126,8 @@
             animation: fade-in-up 0.8s ease-out forwards;
         }
         .grid-pattern {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 50px 50px;
         }

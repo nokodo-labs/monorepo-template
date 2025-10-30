@@ -104,7 +104,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != 'stable' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.docker == 'true') || needs.release.outputs.version != '' || needs.detect-changes.outputs.github_actions == 'true' }}
+    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name != 'stable' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.docker == 'true') || needs.release.outputs.version != '' || needs.detect-changes.outputs.github_actions == 'true' }}
     uses: ./.github/workflows/docker-publish.yml
     secrets: inherit
     with:
