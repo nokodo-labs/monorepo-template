@@ -2,17 +2,17 @@ name: Main CI/CD Pipeline
 
 on:
   pull_request:
-    branches: [dev, production, stable]
+    branches: [dev, stable]
     types: [opened, synchronize, reopened, ready_for_review]
   push:
-    branches: [dev, production, stable]
+    branches: [dev, stable]
   workflow_dispatch:
 
 jobs:
   detect-changes:
     name: Detect Changes
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
+    if: ${{ github.event_name != 'pull_request' || (!github.event.pull_request.draft && (github.head_ref != 'dev' && github.head_ref != 'stable') ) }}
     permissions:
       contents: read
       pull-requests: read
@@ -86,14 +86,7 @@ jobs:
   pages-deploy:
     name: Deploy Frontend to GitHub Pages
     needs: [detect-changes, frontend-ci, release]
-    if: >-
-      ${{ !cancelled() &&
-          (needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true') &&
-          (
-            github.event_name == 'pull_request' ||
-            (github.event_name == 'push' && (github.ref_name == 'production' || github.ref_name == 'stable'))
-          )
-      }}
+    if: ${{ !cancelled() && (needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true') && (github.event_name == 'pull_request' || (github.event_name == 'push' && (github.ref_name == 'production' || github.ref_name == 'stable'))) }}
     uses: ./.github/workflows/deploy-frontend-pages.yml
     permissions:
       contents: read
@@ -107,21 +100,6 @@ jobs:
   promotion:
     name: Promote Dev to Stable
     needs: [detect-changes, backend-ci, frontend-ci, release]
-    if: >-
-      ${{ !cancelled() &&
-          github.event_name == 'push' &&
-          github.ref_type == 'branch' &&
-          github.ref_name == 'dev' &&
-          (
-            needs.detect-changes.outputs.backend == 'true' ||
-            needs.detect-changes.outputs.frontend == 'true' ||
-            needs.detect-changes.outputs.github_actions == 'true' ||
-            needs.detect-changes.outputs.docs == 'true'
-          ) &&
-          (
-            (needs.backend-ci.result == 'success' || needs.backend-ci.result == 'skipped') &&
-            (needs.frontend-ci.result == 'success' || needs.frontend-ci.result == 'skipped')
-          )
-      }}
+    if: ${{ !cancelled() && github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name == 'dev' && (needs.detect-changes.outputs.backend == 'true' || needs.detect-changes.outputs.frontend == 'true' || needs.detect-changes.outputs.github_actions == 'true' || needs.detect-changes.outputs.docs == 'true') && ((needs.backend-ci.result == 'success' || needs.backend-ci.result == 'skipped') && (needs.frontend-ci.result == 'success' || needs.frontend-ci.result == 'skipped')) }}
     uses: ./.github/workflows/promotion.yml
     secrets: inherit

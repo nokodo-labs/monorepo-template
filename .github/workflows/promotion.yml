@@ -94,6 +94,14 @@ jobs:
               "pr_template": "- #{{TITLE}} by @#{{AUTHOR}} in ##{{NUMBER}}"
             }
 
+      - name: Ensure labels exist
+        if: steps.diff.outputs.has_diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "bot" --color "000000" --description "managed by an automated system" --force
+          gh label create "promotion" --color "ff69b4" --description "related to a code promotion" --force
+
       - name: Create or update promotion PR
         if: steps.diff.outputs.has_diff == 'true'
         env:
