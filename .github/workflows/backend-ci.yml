@@ -37,12 +37,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: backend/.python-version
       - name: Install uv
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          working-directory: backend
       - name: Install Dev Dependencies
         run: uv sync --all-extras
       - name: Check Code Formatting
@@ -61,12 +60,11 @@ jobs:
         working-directory: backend
     steps:
       - uses: actions/checkout@v5
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: backend/.python-version
       - name: Install uv
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          working-directory: backend
       - name: Install Dev Dependencies
         run: uv sync --all-extras
       - name: Lint Code
@@ -90,19 +88,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Set up Python (from file)
-        if: ${{ matrix.python == 'file' }}
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: backend/.python-version
-
-      - name: Set up Python (explicit)
-        if: ${{ matrix.python != 'file' }}
-        uses: actions/setup-python@v6
-        with:
-          python-version: "${{ matrix.python }}"
       - name: Install uv
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          working-directory: backend
+          python-version: ${{ matrix.python != 'file' && matrix.python || '' }}
       - name: Install Dependencies
         run: |
           echo "Running on Python ${{ matrix.python }}"
