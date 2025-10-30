@@ -4,7 +4,7 @@
 
 ## Stack
 
--   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17
+-   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17, uv
 -   **Frontend**: Svelte 5, TypeScript, Vite, TailwindCSS, native fetch (zero HTTP deps)
 -   **Type Safety**: OpenAPI TypeScript generator (auto-sync backend → frontend)
 -   **Infra**: Docker Compose, Nginx for static builds
@@ -86,7 +86,7 @@ As an AI, your context is limited, thus overly verbose responses will directly a
 
 When the user asks you to run code, always:
 
--   **For backend code**: Always remember to cd into `backend/`. Always enable the virtual environment.
+-   **For backend code**: Always cd into `backend/`. Use `uv sync --all-extras` for dependencies, `uv run` for commands (e.g., `uv run pytest`), and `uv add <package>` for new deps.
 -   **For frontend code**: Always remember to cd into `frontend/`.
 -   Check the current working directory if unsure where you are.
 -   Check terminal output if unsure whether the venv is activated.

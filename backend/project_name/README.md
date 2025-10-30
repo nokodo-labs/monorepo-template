@@ -6,7 +6,7 @@
 
 This package contains the core business logic and service layer, separate from the FastAPI application. It can be:
 
--   Packaged independently and distributed via pip
+-   Packaged independently and distributed via pip/uv/PyPI
 -   Imported by the API layer (`api/` directory)
 -   Used by other Python projects without FastAPI dependencies
 -   Tested independently with its own test suite

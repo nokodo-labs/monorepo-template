@@ -1,6 +1,6 @@
 version: 2
 updates:
-  # Backend dependencies
+  # Backend (uv manages pip-compatible deps)
   - package-ecosystem: "pip"
     directory: "/backend"
     schedule:

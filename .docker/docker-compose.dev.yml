@@ -12,7 +12,7 @@ services:
     volumes:
       - ../backend:/app
       - /app/__pycache__
-    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uv run uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 
   frontend-dev:
     image: node:24-alpine
