@@ -50,7 +50,7 @@ Access:
 cd backend
 python -m venv .venv
 .venv\Scripts\Activate.ps1  # Windows
-pip install -e .[dev]
+pip install -e .[api,dev]
 cp .env.example .env
 uvicorn api.main:app --reload
 ```

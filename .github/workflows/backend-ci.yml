@@ -85,7 +85,7 @@ jobs:
         run: |
           echo "Running on Python ${{ matrix.python }}"
           python -m pip install --upgrade pip
-          pip install -e .[dev]
+          pip install -e .[api,dev]
 
       - name: Lint Code
         if: ${{ inputs.run_lint }}

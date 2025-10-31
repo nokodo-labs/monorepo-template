@@ -1,23 +1,28 @@
 [project]
-name = "backend"
+name = "project-slug"
 version = "0.1.0"
-description = "FastAPI backend for monorepo template"
+description = "Core library for project-title"
 requires-python = ">=3.13"
 dependencies = [
+    # Library-only dependencies (what gets published to PyPI)
+    "pydantic[email]>=2.9.0",
+]
+
+[project.optional-dependencies]
+api = [
+    # Extra deps needed to run the FastAPI app
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.32.0",
-    "pydantic[email]>=2.9.0",
     "pydantic-settings>=2.5.0",
     "sqlalchemy>=2.0.35",
-    "psycopg[binary]>=3.2.3",
     "alembic>=1.13.3",
+    "psycopg[binary]>=3.2.3",
     "python-multipart>=0.0.12",
     "python-jose[cryptography]>=3.3.0",
     "passlib[bcrypt]>=1.7.4",
     "python-dotenv>=1.0.1",
 ]
 
-[project.optional-dependencies]
 dev = [
     "pytest>=8.3.3",
     "pytest-asyncio>=0.24.0",
@@ -34,10 +39,11 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["api*", "project_slug*"]
+include = ["project_slug", "project_slug.*"]
+exclude = ["api", "api.*", "tests", "tests.*", "*.tests", "*.tests.*"]
 
 [tool.ruff]
-line-length = 100
+line-length = 88
 target-version = "py313"
 
 [tool.ruff.lint]
