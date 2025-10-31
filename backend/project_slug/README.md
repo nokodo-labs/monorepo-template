@@ -1,6 +1,6 @@
 # Project Name SDK
 
-**RENAME THIS PACKAGE**: Change `project_name` to your actual project name throughout the codebase.
+**RENAME THIS PACKAGE**: Change `project_slug` to your actual project name throughout the codebase.
 
 ## Purpose
 
@@ -14,7 +14,7 @@ This package contains the core business logic and service layer, separate from t
 ## Structure
 
 ```
-project_name/
+project_slug/
 ├── __init__.py          # Package initialization
 ├── services/            # Business logic
 ├── utils/               # Helper functions
@@ -25,7 +25,7 @@ project_name/
 
 ```python
 from api.core.database import get_db
-from project_name.services import MyService
+from project_slug.services import MyService
 
 @router.get("/example")
 async def example(db: AsyncSession = Depends(get_db)):
@@ -35,6 +35,6 @@ async def example(db: AsyncSession = Depends(get_db)):
 
 ## Renaming
 
-1. Rename the `project_name` directory to your project name
+1. Rename the `project_slug` directory to your project name
 2. Update imports in `api/` files
 3. Update `pyproject.toml` if packaging separately

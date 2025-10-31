@@ -1,6 +1,6 @@
 # SDK/Service Layer Tests
 
-Tests for the `project_name` package business logic and services.
+Tests for the `project_slug` package business logic and services.
 
 ## Purpose
 
@@ -15,10 +15,10 @@ Test the SDK independently of the API layer:
 
 ```bash
 # Run SDK tests only
-pytest project_name/tests/
+pytest project_slug/tests/
 
 # With coverage
-pytest project_name/tests/ --cov=project_name
+pytest project_slug/tests/ --cov=project_slug
 ```
 
 ## Structure
