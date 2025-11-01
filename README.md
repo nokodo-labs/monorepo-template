@@ -2,7 +2,7 @@
 
 # Monorepo Template
 
-**Modern full-stack boilerplate: FastAPI backend + Svelte 5 frontend with containerization, VS Code support, and AI integrations.**
+**Modern full-stack, production-ready boilerplate: FastAPI backend + Svelte 5 frontend with containerization, full CI/CD, VS Code support, and AI integrations.**
 
 [![License](https://img.shields.io/github/license/nokodo-labs/monorepo-template)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/nokodo-labs/monorepo-template?style=social)](https://github.com/nokodo-labs/monorepo-template/stargazers)
@@ -16,34 +16,52 @@
 ## Stack
 
 -   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17, Alembic
--   **Frontend**: Svelte 5, TypeScript, Vite 6, TailwindCSS, native fetch (zero HTTP deps)
+-   **Frontend**: Svelte 5, Vite 6, Tailwind 4, TypeScript, native fetch (zero HTTP deps)
 -   **Type Safety**: OpenAPI TypeScript generator (auto-sync backend → frontend types)
--   **Dev**: VS Code (tasks, debugger, extensions), Ruff, pytest
+-   **Dev**: VS Code (tasks, debugger, extensions), Ruff, pytest, AI instructions
 -   **Deploy**: Docker Compose with production configs
 
 ## Quick Start
 
-### 1. Customize Template
+### 1. Create Your Repository
 
-**First time setup**: Rename `backend/project_slug/` and update references. See [docs/setup.md](docs/setup.md) for details.
+-   Click **"Use this template"** on GitHub → Create your repo
+-   Clone your new repository locally
 
-### 2. Start Services
+### 2. Customize Project
+
+Rename `backend/project_slug/` to your project name and update references. See [docs/setup.md](docs/setup.md#initial-customization-required) for detailed instructions.
+
+### 3. Start Development
 
 ```bash
 cd .docker
 docker compose up -d
 ```
 
--   Frontend: http://localhost (Nginx)
+**Your services:**
+
+-   Frontend: http://localhost
 -   Backend API: http://localhost:8000
 -   API Docs: http://localhost:8000/v1/docs
 
-Deploys:
+### 4. Deploy to Production
 
--   GitHub Pages via pipeline (PR previews + production/stable publishes)
--   Custom domain supported (CNAME to `<user>.github.io`)
+CI/CD automatically builds and pushes Docker images to GitHub Container Registry (GHCR) on every commit. Images are tagged as:
 
-On Pages the header status shows `preview` (no API polling).
+-   `ghcr.io/your-org/your-repo:latest` (production branch)
+-   `ghcr.io/your-org/your-repo:dev` (dev branch)
+-   `ghcr.io/your-org/your-repo:v1.2.3` (releases)
+
+**Deploy with Docker:**
+
+```bash
+# Pull pre-built images and deploy
+docker compose pull
+docker compose up -d
+```
+
+See [docs/setup.md](docs/setup.md#production-deployment) for full deployment instructions and environment configuration.
 
 ## Structure
 
@@ -54,12 +72,12 @@ backend/
 │   ├── core/              # Config, database
 │   ├── models/            # SQLAlchemy ORM
 │   ├── schemas/           # Pydantic validation
-│   └── tests/             # API & ORM tests
+│   ├── tests/             # API & ORM tests
+│   └── alembic/           # Database migrations
 ├── project_slug/          # SDK/service layer (rename me!)
 │   └── tests/             # SDK unit tests (optional)
 ├── tests/                 # E2E integration tests
-├── data/                  # Data storage (volume mounted)
-└── alembic/               # Database migrations
+└── data/                  # Data storage (volume mounted)
 
 frontend/
 ├── src/
@@ -93,14 +111,6 @@ tools/release_please/      # Release automation config
 -   **OpenAPI types** - Auto-generated TypeScript types from FastAPI schema
 -   **Type safety** - Backend changes = compile errors in frontend if incompatible
 
-**Customization Required Before Use:** See [docs/setup.md](docs/setup.md) for complete setup instructions.
-
-## Configuration
-
-See [docs/setup.md](docs/setup.md) for environment variable setup and configuration details.
-
-To use this as your own starter: click “Use this template” on GitHub, create your repo, then follow [docs/setup.md](docs/setup.md).
-
 ## Commands
 
 See [docs/setup.md](docs/setup.md) for full command reference.
@@ -127,7 +137,8 @@ cd frontend && npm run dev            # Dev server
 -   ✅ Ruff: format, lint, import sorting
 -   ✅ Hot reload: backend + frontend
 -   ✅ Data directory: `backend/data/` (volume mounted)
--   ✅ Production ready: multi-stage builds, Nginx
+-   ✅ Production ready: multi-stage builds, Nginx, auto-publish to GHCR
+-   ✅ CI/CD: Automated Docker builds, testing, and releases
 -   ✅ Tests: pytest with async fixtures
 -   ✅ Minimal: no business logic, easily customizable
 -   ✅ Future-proof: Built on web standards, no legacy dependencies

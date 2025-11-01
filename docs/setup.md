@@ -117,12 +117,39 @@ docker compose up -d --build
 
 ```bash
 cd backend
-alembic revision --autogenerate -m "Description"
-alembic upgrade head
-alembic downgrade -1
+alembic -c api/alembic.ini revision --autogenerate -m "Description"
+alembic -c api/alembic.ini upgrade head
+alembic -c api/alembic.ini downgrade -1
 ```
 
 ## Production Build
+
+### Using Pre-built Images (Recommended)
+
+CI/CD automatically builds and publishes Docker images to GitHub Container Registry on every commit.
+
+**Image tags:**
+
+-   `ghcr.io/your-org/your-repo:latest` - Latest production release
+-   `ghcr.io/your-org/your-repo:dev` - Latest dev branch
+-   `ghcr.io/your-org/your-repo:v1.2.3` - Specific version releases
+-   `ghcr.io/your-org/your-repo:abc1234` - Specific commit
+
+**Deploy with pre-built images:**
+
+```bash
+# Create production compose file
+cd .docker
+
+# Update docker-compose.yml to use GHCR images:
+# Change build: context to: image: ghcr.io/your-org/your-repo:latest
+
+# Pull and start
+docker compose pull
+docker compose up -d
+```
+
+### Building Locally
 
 ```bash
 cd .docker
@@ -131,6 +158,70 @@ docker compose up -d
 ```
 
 Frontend served via Nginx on http://localhost
+
+## Production Deployment
+
+### Environment Configuration
+
+**Required: Update these values for production**
+
+#### backend/.env
+
+```
+DATABASE_URL=postgresql+psycopg://user:password@db:5432/app_db
+SECRET_KEY=generate-secure-random-key-here
+DEBUG=False
+APP_ENV=production
+CORS_ORIGINS='["https://yourdomain.com"]'
+```
+
+#### docker-compose.yml
+
+Update the following in `.docker/docker-compose.yml`:
+
+1. **Database credentials**: Change `POSTGRES_PASSWORD`
+2. **Backend SECRET_KEY**: Use a secure random key
+3. **CORS_ORIGINS**: Add your production domain(s)
+4. **Image sources**: Switch from `build:` to `image: ghcr.io/your-org/your-repo:latest`
+
+### Deployment Steps
+
+1. **Configure environment** - Update `.env` files and `docker-compose.yml`
+2. **Pull images** - `docker compose pull` (or build locally)
+3. **Start services** - `docker compose up -d`
+4. **Run migrations** - `docker compose exec backend alembic -c api/alembic.ini upgrade head`
+5. **Verify** - Check logs with `docker compose logs -f`
+
+### Container Registry Access
+
+Images are public by default. For private images:
+
+```bash
+# Login to GHCR
+echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+
+# Pull images
+docker compose pull
+```
+
+### Updating Production
+
+```bash
+# Pull latest images
+docker compose pull
+
+# Restart with new images
+docker compose up -d
+
+# Run any new migrations
+docker compose exec backend alembic -c api/alembic.ini upgrade head
+```
+
+### Optional: GitHub Pages (Frontend Only)
+
+The template includes CI/CD for deploying the frontend build to GitHub Pages for static hosting. This is separate from the Docker deployment and only hosts the frontend.
+
+Configure in repository settings: Settings → Pages → Source: GitHub Actions
 
 ## Environment Variables
 
@@ -176,9 +267,9 @@ ruff format .                     # Format code
 ruff check . --fix                # Lint + autofix
 
 # Database migrations
-alembic revision --autogenerate -m "Description"  # Create migration
-alembic upgrade head                              # Apply migrations
-alembic downgrade -1                              # Rollback one
+alembic -c api/alembic.ini revision --autogenerate -m "Description"  # Create migration
+alembic -c api/alembic.ini upgrade head                              # Apply migrations
+alembic -c api/alembic.ini downgrade -1                              # Rollback one
 
 # Development
 uvicorn api.main:app --reload     # Start dev server
@@ -206,9 +297,10 @@ npm run generate:api-types        # Generate TypeScript types from OpenAPI
 
 ## Using this Template
 
-1. Click “Use this template” on GitHub and create your new repository
+1. Click "Use this template" on GitHub and create your new repository
 2. Clone your new repository locally
-3. Follow the steps in “Initial Customization” above
-4. Push your changes; your CI/CD will run and GitHub Pages (via the pipeline) will publish previews for PRs and deploy on `production`/`stable`
+3. Follow the steps in "Initial Customization" above
+4. Push your changes - CI/CD will automatically build and publish Docker images to GHCR
+5. Deploy using pre-built images (see [Production Deployment](#production-deployment))
 
 **Types out of sync**: Run `npm run generate:api-types` after backend changes
