@@ -1,8 +1,13 @@
 <div align="center">
 
-# Monorepo Template
+<img src="https://nokodo.net/media/images/logo_full.svg" alt="nokodo logo" width="320" />
+<div style="height:32px"></div>
 
-**Modern full-stack, production-ready boilerplate: FastAPI backend + Svelte 5 frontend with containerization, full CI/CD, VS Code support, and AI integrations.**
+---
+
+<h1>Monorepo Template</h1>
+
+**Modern & production-ready full-stack template that saves you weeks of setup: FastAPI backend + Svelte 5 frontend with containerization, full CI/CD, VS Code support, and AI integrations.**
 
 [![License](https://img.shields.io/github/license/nokodo-labs/monorepo-template)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/nokodo-labs/monorepo-template?style=social)](https://github.com/nokodo-labs/monorepo-template/stargazers)
@@ -13,7 +18,7 @@
 
 </div>
 
-## Stack
+## 🛠️ Stack
 
 -   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17, Alembic
 -   **Frontend**: Svelte 5, Vite 6, Tailwind 4, TypeScript, native fetch (zero HTTP deps)
@@ -21,18 +26,31 @@
 -   **Dev**: VS Code (tasks, debugger, extensions), Ruff, pytest, AI instructions
 -   **Deploy**: Docker Compose with production configs
 
-## Quick Start
+## ✨ Features
 
-### 1. Create Your Repository
+-   🏗️ **Production infrastructure**: PostgreSQL 17, multi-stage Docker builds, Nginx configs
+-   🔒 **End-to-end type safety**: Python type hints → OpenAPI → auto-generated TypeScript types
+-   🤖 **Full CI/CD pipeline**: Automated testing, Docker builds, GHCR publishing, releases
+-   🧪 **Complete test setup**: pytest (backend) + Vitest (frontend) with fixtures and full coverage
+-   📐 **Modern code standards**: EditorConfig, Ruff, ESLint, Prettier pre-configured
+-   💾 **Persistent data storage**: Volume-mounted data directory
+-   🛠️ **VS Code integration**: Tasks, debugger configs, recommended extensions
+-   🤖 **AI agents ready**: Premade instructions & prompts with extensible patterns
+-   🎯 **Minimal boilerplate**: No business logic, just a working foundation
+-   🔮 **Future-proof stack**: Latest stable versions of everything, zero tech debt from day one
+
+## 🚀 Quick Start
+
+### 1️⃣ Create Your Repository
 
 -   Click **"Use this template"** on GitHub → Create your repo
 -   Clone your new repository locally
 
-### 2. Customize Project
+### 2️⃣ Customize Project
 
 Rename `backend/project_slug/` to your project name and update references. See [docs/setup.md](docs/setup.md#initial-customization-required) for detailed instructions.
 
-### 3. Start Development
+### 3️⃣ Start Development
 
 ```bash
 cd .docker
@@ -45,13 +63,15 @@ docker compose up -d
 -   Backend API: http://localhost:8000
 -   API Docs: http://localhost:8000/v1/docs
 
-### 4. Deploy to Production
+> 💡 **VS Code users**: Open the workspace to get tasks, debugger configs, and recommended extensions automatically.
 
-CI/CD automatically builds and pushes Docker images to GitHub Container Registry (GHCR) on every commit. Images are tagged as:
+### 4️⃣ Deploy to Production
 
--   `ghcr.io/your-org/your-repo:latest` (production branch)
--   `ghcr.io/your-org/your-repo:dev` (dev branch)
--   `ghcr.io/your-org/your-repo:v1.2.3` (releases)
+CI/CD automatically builds and pushes Docker images to **GitHub Container Registry (GHCR)** on every commit. Images are tagged as:
+
+-   `ghcr.io/your-org/your-repo:latest` → production branch
+-   `ghcr.io/your-org/your-repo:dev` → dev branch
+-   `ghcr.io/your-org/your-repo:v1.2.3` → releases
 
 **Deploy with Docker:**
 
@@ -61,9 +81,9 @@ docker compose pull
 docker compose up -d
 ```
 
-See [docs/setup.md](docs/setup.md#production-deployment) for full deployment instructions and environment configuration.
+> 💡 **Tip**: See [docs/setup.md](docs/setup.md#production-deployment) for full deployment instructions and environment configuration.
 
-## Structure
+## 📁 Structure
 
 ```
 backend/
@@ -96,7 +116,7 @@ frontend/
 tools/release_please/      # Release automation config
 ```
 
-### Architecture
+### 🏗️ Architecture
 
 **Backend:**
 
@@ -111,38 +131,6 @@ tools/release_please/      # Release automation config
 -   **OpenAPI types** - Auto-generated TypeScript types from FastAPI schema
 -   **Type safety** - Backend changes = compile errors in frontend if incompatible
 
-## Commands
-
-See [docs/setup.md](docs/setup.md) for full command reference.
-
-```bash
-# Quick reference
-cd .docker && docker compose up -d    # Start all services
-cd backend && pytest -v               # Run tests
-cd frontend && npm run dev            # Dev server
-```
-
-## VS Code
-
--   Install recommended extensions (prompt on open)
--   Use tasks: Ctrl+Shift+P → "Tasks: Run Task"
--   Debug: F5 → Choose "Python: FastAPI" or "Frontend: Chrome"
-
-## Features
-
--   ✅ Python 3.13+, Node 24+ enforced
--   ✅ Full type safety: Python type hints, TypeScript strict, OpenAPI auto-sync
--   ✅ Modern: Native fetch (no axios/HTTP lib deps), Svelte 5 runes, FastAPI
--   ✅ Tabs + unix line endings (editorconfig)
--   ✅ Ruff: format, lint, import sorting
--   ✅ Hot reload: backend + frontend
--   ✅ Data directory: `backend/data/` (volume mounted)
--   ✅ Production ready: multi-stage builds, Nginx, auto-publish to GHCR
--   ✅ CI/CD: Automated Docker builds, testing, and releases
--   ✅ Tests: pytest with async fixtures
--   ✅ Minimal: no business logic, easily customizable
--   ✅ Future-proof: Built on web standards, no legacy dependencies
-
-## License
+## 📄 License
 
 BSD 3-Clause - See [LICENSE](LICENSE) for details.

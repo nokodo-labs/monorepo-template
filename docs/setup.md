@@ -30,6 +30,11 @@ Search and replace throughout the codebase:
 -   **`backend/.env`**: Create from `.env.example` and set `SECRET_KEY`, `DATABASE_URL`
 -   **`frontend/.env`**: Create from `.env.example` and set `VITE_API_URL`
 
+### 4. Customize AI Instructions (Optional)
+
+-   **`.github/copilot-instructions.md`**: Update project title and add project-specific patterns
+-   **`.github/instructions/`**: Add domain-specific instruction files (see [.github/instructions/README.md](../.github/instructions/README.md))
+
 ## Quick Start
 
 ```bash
@@ -70,18 +75,57 @@ npm run dev
 
 **Type Generation**: Run `npm run generate:api-types` whenever backend API changes to sync TypeScript types.
 
+## VS Code Setup
+
+The template includes comprehensive VS Code integration that works automatically:
+
+### What's Included
+
+**Automatic Configuration:**
+
+-   Python interpreter auto-selected from `backend/.venv`
+-   Format on save with Ruff (Python) and Prettier (JS/TS/Svelte)
+-   Auto-organize imports and fix lint errors
+-   pytest test discovery
+-   Tailwind CSS IntelliSense
+
+**Tasks** (`Ctrl+Shift+P` → "Tasks: Run Task"):
+
+-   **Backend**: Install Dependencies, Run Server, Run Tests
+-   **Frontend**: Install Dependencies, Dev Server, Build
+-   **Docker**: Build All, Up, Down, Dev Mode
+
+**Debug Configurations** (Press `F5`):
+
+-   **Python: FastAPI** - Debug backend server
+-   **Python: Current File** - Debug active Python file
+-   **Python: Pytest** - Debug current test file
+-   **Frontend: Vite Dev Server** - Launch frontend dev server
+-   **Frontend: Chrome** - Debug frontend in Chrome
+-   **Docker: Attach to Backend** - Attach to running container
+-   **Full Stack** (Compound) - Runs backend + frontend + Chrome together
+
+**Recommended Extensions** (auto-prompt on workspace open):
+
+-   Python, Pylance, Ruff
+-   Svelte, Tailwind CSS, Prettier, ESLint
+-   Docker, Remote Containers
+-   GitLens, GitHub Actions
+-   GitHub Copilot, Claude Code
+-   And more (see `.vscode/extensions.json`)
+
+### Quick Start
+
+1. Open workspace in VS Code
+2. Accept prompt to install recommended extensions
+3. Press `F5` → Choose **"Full Stack"** to run everything at once
+
 ### Database Only
 
 ```bash
 cd .docker
 docker compose up db -d
 ```
-
-## VS Code
-
-1. Install recommended extensions
-2. Select Python interpreter: `./backend/.venv/bin/python`
-3. Use tasks (Ctrl+Shift+P → "Tasks: Run Task")
 
 ## Testing
 
