@@ -1,4 +1,4 @@
-name: Docker Build and Deploy
+name: Build and Publish Docker Image
 
 on:
   workflow_call:
@@ -21,8 +21,8 @@ on:
         default: ""
 
 jobs:
-  build-and-deploy:
-    name: Build container and deploy to registries
+  build-and-push:
+    name: Build and push container image
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -68,7 +68,7 @@ jobs:
           fi
 
       - name: Build image
-        run: docker build backend --file .docker/Dockerfile.backend --tag project-name --build-arg PYTHON_VERSION=${{ steps.set_python_version.outputs.PYTHON_VERSION }}
+        run: docker build backend --file .docker/Dockerfile.backend --tag ${{ github.event.repository.name }} --build-arg PYTHON_VERSION=${{ steps.set_python_version.outputs.PYTHON_VERSION }}
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -124,7 +124,7 @@ jobs:
         run: |
           for tag in ${{ steps.determine_tags.outputs.TAGS }}; do
             echo "Tagging with: $tag"
-            docker tag run_for_glory $tag
+            docker tag ${{ github.event.repository.name }} $tag
           done
 
       - name: Push the Docker image

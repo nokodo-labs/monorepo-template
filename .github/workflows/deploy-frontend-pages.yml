@@ -49,13 +49,12 @@ jobs:
 
       - name: Build
         env:
-          VITE_API_URL: ${{ inputs.vite_api_url || vars.VITE_API_URL || '' }}
-          # Mark this as a Pages build so UI disables API polling
+          VITE_API_URL: ${{ inputs.vite_api_url || '' }}
           VITE_PAGES: "true"
         run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: frontend/dist
 
@@ -72,7 +71,7 @@ jobs:
 
       - name: Comment PR with preview URL
         if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const url = core.getInput('url') || (process.env.DEPLOY_URL || '${{ steps.deployment.outputs.page_url }}');

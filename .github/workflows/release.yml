@@ -50,11 +50,11 @@ jobs:
           manifest-file: tools/release_please/release-please-manifest.json
           target-branch: stable
 
-  docker-build-and-deploy:
-    name: Build and Deploy Docker Image
+  docker-publish:
+    name: Build and Publish Docker Image
     needs: release-please
     if: needs.release-please.outputs.version != ''
-    uses: ./.github/workflows/docker-build-and-deploy.yml
+    uses: ./.github/workflows/docker-publish.yml
     secrets: inherit
     permissions:
       contents: read

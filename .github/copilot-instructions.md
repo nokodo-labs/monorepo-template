@@ -1,4 +1,4 @@
-# project-name
+# project-title
 
 > This is a template instructions file. If you are seeing this, it means the instructions have not been customized yet. Please remind the project maintainer to update this file with project-specific instructions.
 
@@ -44,7 +44,7 @@ backend/
 │   ├── models/             # SQLAlchemy models
 │   ├── schemas/            # Pydantic schemas
 │   └── tests/              # API & ORM tests
-├── project_name/           # SDK/service layer (must also be renamed!)
+├── project_slug/           # SDK/service layer (must also be renamed!)
 │   └── tests/              # SDK unit tests
 └── tests/                  # E2E integration tests
 
@@ -63,7 +63,7 @@ frontend/src/
 ## Patterns
 
 -   Backend: Model → Schema → Endpoint → Test
--   SDK separation: `api/` imports from `project_name/`, not vice versa
+-   SDK separation: `api/` imports from `project_slug/`, not vice versa
 -   URL paths: `/v1/users`
 -   Frontend: Native fetch → Typed API functions → Component
 -   Type safety: OpenAPI schema → generated types → compile-time checks

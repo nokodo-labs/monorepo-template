@@ -1,8 +1,13 @@
 <div align="center">
 
-# Monorepo Template
+<img src="https://nokodo.net/media/images/logo_full.svg" alt="nokodo logo" width="320" />
+<div style="height:32px"></div>
 
-**Modern full-stack boilerplate: FastAPI backend + Svelte 5 frontend with containerization, VS Code support, and AI integrations.**
+---
+
+<h1>Monorepo Template</h1>
+
+**Modern & production-ready full-stack template that saves you weeks of setup: FastAPI backend + Svelte 5 frontend with containerization, full CI/CD, VS Code support, and AI integrations.**
 
 [![License](https://img.shields.io/github/license/nokodo-labs/monorepo-template)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/nokodo-labs/monorepo-template?style=social)](https://github.com/nokodo-labs/monorepo-template/stargazers)
@@ -13,39 +18,72 @@
 
 </div>
 
-## Stack
+## 🛠️ Stack
 
 -   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17, Alembic
--   **Frontend**: Svelte 5, TypeScript, Vite 6, TailwindCSS, native fetch (zero HTTP deps)
+-   **Frontend**: Svelte 5, Vite 6, Tailwind 4, TypeScript, native fetch (zero HTTP deps)
 -   **Type Safety**: OpenAPI TypeScript generator (auto-sync backend → frontend types)
--   **Dev**: VS Code (tasks, debugger, extensions), Ruff, pytest
+-   **Dev**: VS Code (tasks, debugger, extensions), Ruff, pytest, AI instructions
 -   **Deploy**: Docker Compose with production configs
 
-## Quick Start
+## ✨ Features
 
-### 1. Customize Template
+-   🏗️ **Production infrastructure**: PostgreSQL 17, multi-stage Docker builds, Nginx configs
+-   🔒 **End-to-end type safety**: Python type hints → OpenAPI → auto-generated TypeScript types
+-   🤖 **Full CI/CD pipeline**: Automated testing, Docker builds, GHCR publishing, releases
+-   🧪 **Complete test setup**: pytest (backend) + Vitest (frontend) with fixtures and full coverage
+-   📐 **Modern code standards**: EditorConfig, Ruff, ESLint, Prettier pre-configured
+-   💾 **Persistent data storage**: Volume-mounted data directory
+-   🛠️ **VS Code integration**: Tasks, debugger configs, recommended extensions
+-   🤖 **AI agents ready**: Premade instructions & prompts with extensible patterns
+-   🎯 **Minimal boilerplate**: No business logic, just a working foundation
+-   🔮 **Future-proof stack**: Latest stable versions of everything, zero tech debt from day one
 
-**First time setup**: Rename `backend/project_name/` and update references. See [docs/setup.md](docs/setup.md) for details.
+## 🚀 Quick Start
 
-### 2. Start Services
+### 1️⃣ Create Your Repository
+
+-   Click **"Use this template"** on GitHub → Create your repo
+-   Clone your new repository locally
+
+### 2️⃣ Customize Project
+
+Rename `backend/project_slug/` to your project name and update references. See [docs/setup.md](docs/setup.md#initial-customization-required) for detailed instructions.
+
+### 3️⃣ Start Development
 
 ```bash
 cd .docker
 docker compose up -d
 ```
 
--   Frontend: http://localhost (Nginx)
+**Your services:**
+
+-   Frontend: http://localhost
 -   Backend API: http://localhost:8000
 -   API Docs: http://localhost:8000/v1/docs
 
-Deploys:
+> 💡 **VS Code users**: Open the workspace to get tasks, debugger configs, and recommended extensions automatically.
 
--   GitHub Pages via pipeline (PR previews + production/stable publishes)
--   Custom domain supported (CNAME to `<user>.github.io`)
+### 4️⃣ Deploy to Production
 
-On Pages the header status shows `preview` (no API polling).
+CI/CD automatically builds and pushes Docker images to **GitHub Container Registry (GHCR)** on every commit. Images are tagged as:
 
-## Structure
+-   `ghcr.io/your-org/your-repo:latest` → production branch
+-   `ghcr.io/your-org/your-repo:dev` → dev branch
+-   `ghcr.io/your-org/your-repo:v1.2.3` → releases
+
+**Deploy with Docker:**
+
+```bash
+# Pull pre-built images and deploy
+docker compose pull
+docker compose up -d
+```
+
+> 💡 **Tip**: See [docs/setup.md](docs/setup.md#production-deployment) for full deployment instructions and environment configuration.
+
+## 📁 Structure
 
 ```
 backend/
@@ -54,12 +92,12 @@ backend/
 │   ├── core/              # Config, database
 │   ├── models/            # SQLAlchemy ORM
 │   ├── schemas/           # Pydantic validation
-│   └── tests/             # API & ORM tests
-├── project_name/          # SDK/service layer (rename me!)
+│   ├── tests/             # API & ORM tests
+│   └── alembic/           # Database migrations
+├── project_slug/          # SDK/service layer (rename me!)
 │   └── tests/             # SDK unit tests (optional)
 ├── tests/                 # E2E integration tests
-├── data/                  # Data storage (volume mounted)
-└── alembic/               # Database migrations
+└── data/                  # Data storage (volume mounted)
 
 frontend/
 ├── src/
@@ -78,13 +116,13 @@ frontend/
 tools/release_please/      # Release automation config
 ```
 
-### Architecture
+### 🏗️ Architecture
 
 **Backend:**
 
 -   **`api/`**: FastAPI app, routes, ORM, database setup
--   **`project_name/`**: Business logic SDK that can be packaged separately for pip distribution
--   **Testing**: 3 tiers (API tests in `api/tests/`, SDK tests in `project_name/tests/`, E2E in `tests/`)
+-   **`project_slug/`**: Business logic SDK that can be packaged separately for pip distribution
+-   **Testing**: 3 tiers (API tests in `api/tests/`, SDK tests in `project_slug/tests/`, E2E in `tests/`)
 -   **URLs**: `/v1/users` (no `/api` prefix - deploy on `api.yourdomain.com`)
 
 **Frontend:**
@@ -93,45 +131,6 @@ tools/release_please/      # Release automation config
 -   **OpenAPI types** - Auto-generated TypeScript types from FastAPI schema
 -   **Type safety** - Backend changes = compile errors in frontend if incompatible
 
-**Customization Required Before Use:** See [docs/setup.md](docs/setup.md) for complete setup instructions.
-
-## Configuration
-
-See [docs/setup.md](docs/setup.md) for environment variable setup and configuration details.
-
-To use this as your own starter: click “Use this template” on GitHub, create your repo, then follow [docs/setup.md](docs/setup.md).
-
-## Commands
-
-See [docs/setup.md](docs/setup.md) for full command reference.
-
-```bash
-# Quick reference
-cd .docker && docker compose up -d    # Start all services
-cd backend && pytest -v               # Run tests
-cd frontend && npm run dev            # Dev server
-```
-
-## VS Code
-
--   Install recommended extensions (prompt on open)
--   Use tasks: Ctrl+Shift+P → "Tasks: Run Task"
--   Debug: F5 → Choose "Python: FastAPI" or "Frontend: Chrome"
-
-## Features
-
--   ✅ Python 3.13+, Node 24+ enforced
--   ✅ Full type safety: Python type hints, TypeScript strict, OpenAPI auto-sync
--   ✅ Modern: Native fetch (no axios/HTTP lib deps), Svelte 5 runes, FastAPI
--   ✅ Tabs + unix line endings (editorconfig)
--   ✅ Ruff: format, lint, import sorting
--   ✅ Hot reload: backend + frontend
--   ✅ Data directory: `backend/data/` (volume mounted)
--   ✅ Production ready: multi-stage builds, Nginx
--   ✅ Tests: pytest with async fixtures
--   ✅ Minimal: no business logic, easily customizable
--   ✅ Future-proof: Built on web standards, no legacy dependencies
-
-## License
+## 📄 License
 
 BSD 3-Clause - See [LICENSE](LICENSE) for details.

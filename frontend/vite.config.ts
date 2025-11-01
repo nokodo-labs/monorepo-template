@@ -5,6 +5,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [svelte()],
+    base: './',
     resolve: {
         alias: {
             $lib: path.resolve(__dirname, 'src/lib'),
