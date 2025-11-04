@@ -48,15 +48,12 @@ jobs:
           enable-cache: true
 
       - name: Install Dependencies
-        working-directory: backend
         run: uv sync --all-extras
 
       - name: Check Code Formatting
-        working-directory: backend
         run: uv run ruff format --check .
 
       - name: Check Import Sorting
-        working-directory: backend
         run: uv run ruff check . --select I --no-fix --output-format=github
 
   quality:
@@ -95,15 +92,12 @@ jobs:
           enable-cache: true
 
       - name: Install Dependencies
-        working-directory: backend
         run: uv sync --all-extras
 
       - name: Lint Code
         if: ${{ inputs.run_lint }}
-        working-directory: backend
         run: uv run ruff check . --output-format=github
 
       - name: Run Tests
         if: ${{ inputs.run_tests }}
-        working-directory: backend
         run: uv run pytest -v
