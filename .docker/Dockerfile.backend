@@ -5,24 +5,27 @@ FROM python:3.13-slim
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    UV_SYSTEM_PYTHON=1
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies and uv
 RUN apt-get update && apt-get install -y \
     gcc \
     postgresql-client \
+    curl \
+    && curl -LsSf https://astral.sh/uv/install.sh | sh \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency files
-COPY pyproject.toml ./
+# Add uv to PATH
+ENV PATH="/root/.local/bin:$PATH"
 
-# Install Python dependencies (library + API deps for production)
-RUN pip install --upgrade pip setuptools wheel && \
-    pip install -e .[api]
+# Copy dependency files
+COPY pyproject.toml uv.lock* ./
+
+# Install dependencies (library + API deps for production)
+RUN uv sync --no-dev --extra api
 
 # Copy application code
 COPY . .
@@ -30,5 +33,5 @@ COPY . .
 # Expose port
 EXPOSE 8000
 
-# Run the application
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Run the application directly from venv
+CMD [".venv/bin/uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

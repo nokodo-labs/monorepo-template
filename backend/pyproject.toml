@@ -34,13 +34,11 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=75.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["project_slug", "project_slug.*"]
-exclude = ["api", "api.*", "tests", "tests.*", "*.tests", "*.tests.*"]
+[tool.hatch.build.targets.wheel]
+packages = ["project_slug", "api"]
 
 [tool.ruff]
 line-length = 88

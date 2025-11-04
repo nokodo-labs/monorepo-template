@@ -20,7 +20,7 @@
 
 ## 🛠️ Stack
 
--   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17, Alembic
+-   **Backend**: FastAPI (Python 3.13+), SQLAlchemy 2.0+, Pydantic, PostgreSQL 17, Alembic, uv
 -   **Frontend**: Svelte 5, Vite 6, Tailwind 4, TypeScript, native fetch (zero HTTP deps)
 -   **Type Safety**: OpenAPI TypeScript generator (auto-sync backend → frontend types)
 -   **Dev**: VS Code (tasks, debugger, extensions), Ruff, pytest, AI instructions
@@ -121,7 +121,7 @@ tools/release_please/      # Release automation config
 **Backend:**
 
 -   **`api/`**: FastAPI app, routes, ORM, database setup
--   **`project_slug/`**: Business logic SDK that can be packaged separately for pip distribution
+-   **`project_slug/`**: Business logic SDK that can be packaged separately for pip/uv/PyPI distribution
 -   **Testing**: 3 tiers (API tests in `api/tests/`, SDK tests in `project_slug/tests/`, E2E in `tests/`)
 -   **URLs**: `/v1/users` (no `/api` prefix - deploy on `api.yourdomain.com`)
 
