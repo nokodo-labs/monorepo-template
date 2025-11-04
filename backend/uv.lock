@@ -623,6 +623,7 @@ dependencies = [
 api = [
     { name = "alembic" },
     { name = "fastapi" },
+    { name = "greenlet" },
     { name = "passlib", extra = ["bcrypt"] },
     { name = "psycopg", extra = ["binary"] },
     { name = "pydantic-settings" },
@@ -647,6 +648,7 @@ requires-dist = [
     { name = "aiosqlite", marker = "extra == 'dev'", specifier = ">=0.20.0" },
     { name = "alembic", marker = "extra == 'api'", specifier = ">=1.13.3" },
     { name = "fastapi", marker = "extra == 'api'", specifier = ">=0.115.0" },
+    { name = "greenlet", marker = "extra == 'api'", specifier = ">=3.0.0" },
     { name = "httpx", marker = "extra == 'dev'", specifier = ">=0.27.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.13.0" },
     { name = "passlib", extras = ["bcrypt"], marker = "extra == 'api'", specifier = ">=1.7.4" },
