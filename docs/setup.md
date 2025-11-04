@@ -1,6 +1,39 @@
 # Setup & Customization
 
-These steps are for developers who created a new repository using the “Use this template” button from this template.
+These steps are for developers who created a new repository using the "Use this template" button from this template.
+
+## Prerequisites
+
+### Install uv (Python Package Manager)
+
+This project uses [uv](https://github.com/astral-sh/uv) for fast Python package management with automatic venv and lockfile support.
+
+**macOS/Linux:**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**Windows:**
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+**Via pip/pipx:**
+```bash
+pip install uv
+# or
+pipx install uv
+```
+
+After installation, restart your terminal or source your shell config.
+
+**Key commands:**
+- `uv sync --all-extras` - Install all deps + dev tools
+- `uv sync --no-dev` - Production deps only
+- `uv add <package>` - Add dependency
+- `uv add --dev <package>` - Add dev dependency
+- `uv run <command>` - Run in uv environment
+- `uv lock` - Update lockfile
 
 ## Initial Customization (Required)
 
@@ -53,11 +86,9 @@ Access:
 
 ```bash
 cd backend
-python -m venv .venv
-.venv\Scripts\Activate.ps1  # Windows
-pip install -e .[api,dev]
+uv sync --all-extras  # Install all deps + create venv
 cp .env.example .env
-uvicorn api.main:app --reload
+uv run uvicorn api.main:app --reload
 ```
 
 ### Frontend
