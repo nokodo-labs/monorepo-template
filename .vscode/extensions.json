@@ -9,7 +9,7 @@
 		// JavaScript/TypeScript/Svelte
 		"svelte.svelte-vscode",
 		"bradlc.vscode-tailwindcss",
-		"esbenp.prettier-vscode",
+		"prettier.prettier-vscode",
 		"dbaeumer.vscode-eslint",
 
 		// YAML
@@ -22,6 +22,7 @@
 
 		// Git & GitHub
 		"eamodio.gitlens",
+		"github.vscode-pull-request-github",
 		"github.vscode-github-actions",
 		"eamodio.gitlens",
 
@@ -30,9 +31,9 @@
 		"github.copilot-chat",
 		"ms-vscode.vscode-websearchforcopilot",
 		"anthropic.claude-code",
+		"openai.chatgpt",
 
 		// Utilities
-		"visualstudioexptteam.vscodeintellicode",
 		"gruntfuggly.todo-tree"
 	]
 }
