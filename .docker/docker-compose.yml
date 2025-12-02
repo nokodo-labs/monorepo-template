@@ -55,8 +55,9 @@ services:
       # Hot reload for development (remove in production)
       - ../backend:/app
       - /app/__pycache__
+      - /app/.venv
     # Development command (replace with production command)
-    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uv run uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 
   # Svelte Frontend (Nginx)
   frontend:

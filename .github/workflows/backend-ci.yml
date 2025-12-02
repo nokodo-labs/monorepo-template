@@ -42,14 +42,19 @@ jobs:
         with:
           python-version-file: backend/.python-version
 
-      - name: Install Ruff
-        run: python -m pip install --upgrade pip ruff
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Dependencies
+        run: uv sync --all-extras
 
       - name: Check Code Formatting
-        run: ruff format --check .
+        run: uv run ruff format --check .
 
       - name: Check Import Sorting
-        run: ruff check . --select I --no-fix --output-format=github
+        run: uv run ruff check . --select I --no-fix --output-format=github
 
   quality:
     name: Lint and Test on Python ${{ matrix.python }}
@@ -81,16 +86,18 @@ jobs:
         with:
           python-version: "${{ matrix.python }}"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
       - name: Install Dependencies
-        run: |
-          echo "Running on Python ${{ matrix.python }}"
-          python -m pip install --upgrade pip
-          pip install -e .[api,dev]
+        run: uv sync --all-extras
 
       - name: Lint Code
         if: ${{ inputs.run_lint }}
-        run: ruff check . --output-format=github
+        run: uv run ruff check . --output-format=github
 
       - name: Run Tests
         if: ${{ inputs.run_tests }}
-        run: pytest -v
+        run: uv run pytest -v
