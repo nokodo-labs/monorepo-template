@@ -9,16 +9,19 @@ These steps are for developers who created a new repository using the "Use this 
 This project uses [uv](https://github.com/astral-sh/uv) for fast Python package management with automatic venv and lockfile support.
 
 **macOS/Linux:**
+
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 **Windows:**
+
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 **Via pip/pipx:**
+
 ```bash
 pip install uv
 # or
@@ -28,12 +31,13 @@ pipx install uv
 After installation, restart your terminal or source your shell config.
 
 **Key commands:**
-- `uv sync --all-extras` - Install all deps + dev tools
-- `uv sync --no-dev` - Production deps only
-- `uv add <package>` - Add dependency
-- `uv add --dev <package>` - Add dev dependency
-- `uv run <command>` - Run in uv environment
-- `uv lock` - Update lockfile
+
+-   `uv sync --all-extras` - Install all deps + dev tools
+-   `uv sync --no-dev` - Production deps only
+-   `uv add <package>` - Add dependency
+-   `uv add --dev <package>` - Add dev dependency
+-   `uv run <command>` - Run in uv environment
+-   `uv lock` - Update lockfile
 
 ## Initial Customization (Required)
 
@@ -52,6 +56,7 @@ mv project_slug your-project-slug
 Search and replace throughout the codebase:
 
 -   `"project-title"` → `"Your Full Project Title"` (used in documentation headers and release PR titles)
+-   `"project-description"` → a brief description of your project for AI agents (or remove entirely)
 -   `"project-slug"` → `"your-project-slug"` in `tools/release_please/*.json`
 -   `from project_slug` → `from your_project_slug` in Python imports
 -   `PROJECT_NAME = "FastAPI Monorepo"` → your project name in `backend/api/core/config.py`
@@ -65,8 +70,9 @@ Search and replace throughout the codebase:
 
 ### 4. Customize AI Instructions (Optional)
 
--   **`.github/copilot-instructions.md`**: Update project title and add project-specific patterns
--   **`.github/instructions/`**: Add domain-specific instruction files (see [.github/instructions/README.md](../.github/instructions/README.md))
+-   **`AGENTS.md`**: Update project title, description, and add project-specific patterns
+-   **`backend/AGENTS.md`**: Add backend-specific guidelines
+-   **`frontend/AGENTS.md`**: Add frontend-specific guidelines
 
 ## Quick Start
 

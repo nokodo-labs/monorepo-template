@@ -28,6 +28,7 @@
 
 ## ✨ Features
 
+-   ⚡ **Opinionated by design**: Deliberate choices, cohesive stack, no decision fatigue
 -   🏗️ **Production infrastructure**: PostgreSQL 17, multi-stage Docker builds, Nginx configs
 -   🔒 **End-to-end type safety**: Python type hints → OpenAPI → auto-generated TypeScript types
 -   🤖 **Full CI/CD pipeline**: Automated testing, Docker builds, GHCR publishing, releases
