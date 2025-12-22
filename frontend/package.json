@@ -21,7 +21,7 @@
         "@sveltejs/vite-plugin-svelte": "^6.2.1",
         "@tailwindcss/postcss": "^4.1.17",
         "@testing-library/jest-dom": "^6.6.3",
-        "@testing-library/svelte": "^5.2.9",
+        "@testing-library/svelte": "^5.2.10",
         "@tsconfig/svelte": "^5.0.6",
         "@types/node": "^24.10.1",
         "@vitest/coverage-v8": "^4.0.14",
