@@ -30,7 +30,7 @@
         "eslint": "^9.39.1",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-svelte": "^3.13.0",
-        "happy-dom": "^20.1.0",
+        "happy-dom": "^20.3.3",
         "openapi-typescript": "^7.4.2",
         "postcss": "^8.4.47",
         "prettier": "^3.3.3",
