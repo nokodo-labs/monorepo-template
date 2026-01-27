@@ -33,7 +33,7 @@
         "happy-dom": "^20.3.9",
         "openapi-typescript": "^7.4.2",
         "postcss": "^8.4.47",
-        "prettier": "^3.3.3",
+        "prettier": "^3.8.1",
         "prettier-plugin-svelte": "^3.4.0",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "svelte": "^5.48.2",
