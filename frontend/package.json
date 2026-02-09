@@ -22,7 +22,7 @@
         "@tailwindcss/postcss": "^4.1.18",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/svelte": "^5.3.1",
-        "@tsconfig/svelte": "^5.0.6",
+        "@tsconfig/svelte": "^5.0.7",
         "@types/node": "^24.10.1",
         "@vitest/coverage-v8": "^4.0.18",
         "@vitest/ui": "^4.0.3",
