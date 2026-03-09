@@ -71,7 +71,7 @@ jobs:
         run: docker build backend --file .docker/Dockerfile.backend --tag ${{ github.event.repository.name }} --build-arg PYTHON_VERSION=${{ steps.set_python_version.outputs.PYTHON_VERSION }}
 
       - name: Log in to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
