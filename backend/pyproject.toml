@@ -5,7 +5,7 @@ description = "Core library for project-title"
 requires-python = ">=3.13"
 dependencies = [
     # Library-only dependencies (what gets published to PyPI)
-    "pydantic[email]>=2.9.0",
+    "pydantic[email]>=2.12.5",
 ]
 
 [project.optional-dependencies]
