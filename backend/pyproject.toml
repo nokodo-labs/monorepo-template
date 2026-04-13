@@ -12,7 +12,7 @@ dependencies = [
 api = [
     # Extra deps needed to run the FastAPI app
     "fastapi>=0.115.0",
-    "uvicorn[standard]>=0.32.0",
+    "uvicorn[standard]>=0.44.0",
     "pydantic-settings>=2.5.0",
     "sqlalchemy>=2.0.35",
     "alembic>=1.13.3",
