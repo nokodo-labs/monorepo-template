@@ -33,7 +33,7 @@ jobs:
       - name: Manage Prerelease
         if: ${{ github.ref_name == 'dev' }}
         id: pre-release
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: tools/release_please/release-please-config.prerelease.json
@@ -43,7 +43,7 @@ jobs:
       - name: Manage Full Release
         if: ${{ github.ref_name == 'stable' }}
         id: release
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: tools/release_please/release-please-config.json
