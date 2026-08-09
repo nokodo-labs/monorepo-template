@@ -9,6 +9,10 @@ updates:
     labels:
       - "dependencies"
       - "backend"
+    groups:
+      backend-all:
+        patterns:
+          - "*"
 
   # Frontend dependencies
   - package-ecosystem: "npm"
@@ -19,6 +23,10 @@ updates:
     labels:
       - "dependencies"
       - "frontend"
+    groups:
+      frontend-all:
+        patterns:
+          - "*"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
@@ -28,6 +36,10 @@ updates:
     labels:
       - "dependencies"
       - "ci/cd"
+    groups:
+      github-actions-all:
+        patterns:
+          - "*"
 
   # Docker
   - package-ecosystem: "docker"
@@ -37,3 +49,7 @@ updates:
     labels:
       - "dependencies"
       - "containerization"
+    groups:
+      docker-all:
+        patterns:
+          - "*"
