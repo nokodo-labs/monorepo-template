@@ -6,6 +6,10 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 30
+    # Extras-bearing requirements (pydantic[email], uvicorn[standard], ...) resolve
+    # to an empty previous version from pyproject, which discards the whole group.
+    # Deriving versions from uv.lock instead avoids that.
+    versioning-strategy: lockfile-only
     labels:
       - "dependencies"
       - "backend"
