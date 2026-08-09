@@ -27,6 +27,7 @@ project_slug/
 from api.core.database import get_db
 from project_slug.services import MyService
 
+
 @router.get("/example")
 async def example(db: AsyncSession = Depends(get_db)):
 	service = MyService(db)
