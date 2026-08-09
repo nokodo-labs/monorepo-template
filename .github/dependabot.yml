@@ -1,7 +1,7 @@
 version: 2
 updates:
   # Backend dependencies
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/backend"
     schedule:
       interval: "weekly"

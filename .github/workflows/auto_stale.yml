@@ -35,3 +35,6 @@ jobs:
           stale-issue-label: 'stale'
           stale-pr-label: 'stale'
           exempt-issue-labels: 'P5 - Backlog'
+          # Dependabot reads an unmerged close as "ignore this version", which
+          # silently suppresses the dependency until a newer release appears.
+          exempt-pr-labels: 'P5 - Backlog,dependencies'
