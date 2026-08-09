@@ -15,6 +15,11 @@ updates:
       - "backend"
     groups:
       backend-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      backend-security:
+        applies-to: security-updates
         patterns:
           - "*"
 
@@ -29,6 +34,11 @@ updates:
       - "frontend"
     groups:
       frontend-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      frontend-security:
+        applies-to: security-updates
         patterns:
           - "*"
 
@@ -42,6 +52,11 @@ updates:
       - "ci/cd"
     groups:
       github-actions-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      github-actions-security:
+        applies-to: security-updates
         patterns:
           - "*"
 
@@ -55,5 +70,10 @@ updates:
       - "containerization"
     groups:
       docker-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      docker-security:
+        applies-to: security-updates
         patterns:
           - "*"
