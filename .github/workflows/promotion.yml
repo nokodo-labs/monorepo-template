@@ -49,7 +49,7 @@ jobs:
       - name: Check for differences between branches
         id: diff
         if: steps.config.outputs.has_config == 'true'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const { data } = await github.rest.repos.compareCommits({
@@ -67,7 +67,7 @@ jobs:
 
       - name: Checkout repository
         if: steps.config.outputs.has_config == 'true' && steps.diff.outputs.has_diff == 'true'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

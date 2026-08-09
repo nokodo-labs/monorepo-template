@@ -35,10 +35,10 @@ jobs:
         shell: bash
         working-directory: backend
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version-file: backend/.python-version
 
@@ -72,17 +72,17 @@ jobs:
         shell: bash
         working-directory: backend
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Set up Python (from file)
         if: ${{ matrix.python == 'file' }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version-file: backend/.python-version
 
       - name: Set up Python (explicit)
         if: ${{ matrix.python != 'file' }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "${{ matrix.python }}"
 
