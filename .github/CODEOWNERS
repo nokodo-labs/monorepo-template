@@ -7,7 +7,7 @@
 # Backend
 /backend/ @your-github-org/backend-team
 /backend/api/ @your-github-org/backend-team
-/backend/project_name/ @your-github-org/backend-team
+/backend/project_slug/ @your-github-org/backend-team
 
 # Frontend
 /frontend/ @your-github-org/frontend-team

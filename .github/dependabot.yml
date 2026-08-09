@@ -1,14 +1,27 @@
 version: 2
 updates:
   # Backend dependencies
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/backend"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 30
+    # Extras-bearing requirements (pydantic[email], uvicorn[standard], ...) resolve
+    # to an empty previous version from pyproject, which discards the whole group.
+    # Deriving versions from uv.lock instead avoids that.
+    versioning-strategy: lockfile-only
     labels:
       - "dependencies"
       - "backend"
+    groups:
+      backend-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      backend-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   # Frontend dependencies
   - package-ecosystem: "npm"
@@ -19,6 +32,15 @@ updates:
     labels:
       - "dependencies"
       - "frontend"
+    groups:
+      frontend-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      frontend-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
@@ -28,6 +50,15 @@ updates:
     labels:
       - "dependencies"
       - "ci/cd"
+    groups:
+      github-actions-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      github-actions-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   # Docker
   - package-ecosystem: "docker"
@@ -37,3 +68,12 @@ updates:
     labels:
       - "dependencies"
       - "containerization"
+    groups:
+      docker-all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      docker-security:
+        applies-to: security-updates
+        patterns:
+          - "*"

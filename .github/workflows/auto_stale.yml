@@ -22,7 +22,7 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v10
+      - uses: actions/stale@v11
         with:
           stale-issue-message: 'This issue is stale because it has been open 45 days with no activity. Remove stale label, comment or mark with Backlog priority, or this will be closed in 14 days.'
           stale-pr-message: 'This PR is stale because it has been open 60 days with no activity. Remove stale label, comment or mark with Backlog priority, or this will be closed in 21 days.'
@@ -35,3 +35,6 @@ jobs:
           stale-issue-label: 'stale'
           stale-pr-label: 'stale'
           exempt-issue-labels: 'P5 - Backlog'
+          # Dependabot reads an unmerged close as "ignore this version", which
+          # silently suppresses the dependency until a newer release appears.
+          exempt-pr-labels: 'P5 - Backlog,dependencies'

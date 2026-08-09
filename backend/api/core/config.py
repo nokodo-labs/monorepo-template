@@ -27,7 +27,7 @@ class Settings(BaseSettings):
 	SECRET_KEY: str = "changeme"
 
 	# Database
-	# Provide a safe default for dev/CI; env can override to Postgres in real deployments
+	# Provide a safe default for dev/CI; env can override to Postgres in real deployment
 	DATABASE_URL: str = "sqlite+aiosqlite:///./app.db"
 
 	# Testing

@@ -1,23 +1,29 @@
 [project]
-name = "backend"
+name = "project-slug"
 version = "0.1.0"
-description = "FastAPI backend for monorepo template"
+description = "Core library for project-title"
 requires-python = ">=3.13"
 dependencies = [
+    # Library-only dependencies (what gets published to PyPI)
+    "pydantic[email]>=2.9.0",
+]
+
+[project.optional-dependencies]
+api = [
+    # Extra deps needed to run the FastAPI app
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.32.0",
-    "pydantic[email]>=2.9.0",
     "pydantic-settings>=2.5.0",
     "sqlalchemy>=2.0.35",
-    "psycopg[binary]>=3.2.3",
     "alembic>=1.13.3",
+    "psycopg[binary]>=3.2.3",
     "python-multipart>=0.0.12",
     "python-jose[cryptography]>=3.3.0",
     "passlib[bcrypt]>=1.7.4",
     "python-dotenv>=1.0.1",
+    "greenlet>=3.0.0",
 ]
 
-[project.optional-dependencies]
 dev = [
     "pytest>=8.3.3",
     "pytest-asyncio>=0.24.0",
@@ -29,15 +35,14 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=75.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["api*", "project_name*"]
+[tool.hatch.build.targets.wheel]
+packages = ["project_slug", "api"]
 
 [tool.ruff]
-line-length = 100
+line-length = 88
 target-version = "py313"
 
 [tool.ruff.lint]

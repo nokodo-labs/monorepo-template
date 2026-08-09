@@ -23,4 +23,5 @@ Thumbs.db
 npm-debug.log*
 
 # Auto-generated (regenerate with npm run generate:api-types)
-src/lib/api/types.ts
+# Temporarily committed until we have a static OpenAPI schema
+# src/lib/api/types.ts

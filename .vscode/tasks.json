@@ -4,7 +4,7 @@
 		{
 			"label": "Backend: Install Dependencies",
 			"type": "shell",
-			"command": "pip install -e .[dev]",
+			"command": "uv sync --all-extras",
 			"options": {
 				"cwd": "${workspaceFolder}/backend"
 			},
@@ -18,7 +18,7 @@
 		{
 			"label": "Backend: Run Server",
 			"type": "shell",
-			"command": "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+			"command": "uv run uvicorn api.main:app --reload --host 0.0.0.0 --port 8000",
 			"options": {
 				"cwd": "${workspaceFolder}/backend"
 			},
@@ -45,7 +45,7 @@
 		{
 			"label": "Backend: Run Tests",
 			"type": "shell",
-			"command": "pytest -v",
+			"command": "uv run pytest -v",
 			"options": {
 				"cwd": "${workspaceFolder}/backend"
 			},
@@ -105,6 +105,34 @@
 				"cwd": "${workspaceFolder}/frontend"
 			},
 			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Frontend: Check",
+			"type": "shell",
+			"command": "npm run check",
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			},
+			"problemMatcher": "$tsc-watch",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "Frontend: Run Tests",
+			"type": "shell",
+			"command": "npm run test",
+			"options": {
+				"cwd": "${workspaceFolder}/frontend"
+			},
+			"group": "test",
 			"presentation": {
 				"echo": true,
 				"reveal": "always",

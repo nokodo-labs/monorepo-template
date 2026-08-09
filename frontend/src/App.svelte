@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { api } from './lib/api/index.ts'
+    import { api } from './lib/api'
 
     let health = $state<{ status: string } | null>(null)
     const IS_PAGES = typeof import.meta !== 'undefined' && import.meta.env?.VITE_PAGES === 'true'
@@ -24,7 +24,9 @@
         checkHealth()
     })
 
-    async function copyToClipboard(text: string, button: HTMLButtonElement) {
+    async function copyToClipboard(text: string, target: EventTarget | null) {
+        if (!target || !(target instanceof HTMLButtonElement)) return
+        const button = target
         await navigator.clipboard.writeText(text)
         const original = button.textContent
         button.textContent = '✓'
@@ -301,14 +303,14 @@
                                 <button
                                     onclick={(e) =>
                                         copyToClipboard(
-                                            'cd ../backend && pip install -e .[dev]\ncd ../frontend && npm install',
+                                            'cd ../backend && pip install -e .[api,dev]\ncd ../frontend && npm install',
                                             e.currentTarget
                                         )}
                                     class="absolute top-3 right-3 z-10 rounded border border-zinc-700 bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-zinc-400 shadow-lg transition-all hover:border-zinc-600 hover:bg-zinc-700 hover:text-white"
                                     >copy</button
                                 >
                                 <div class="whitespace-nowrap">
-                                    cd ../backend && pip install -e .[dev]
+                                    cd ../backend && pip install -e .[api,dev]
                                 </div>
                                 <div class="mt-1 whitespace-nowrap">
                                     cd ../frontend && npm install

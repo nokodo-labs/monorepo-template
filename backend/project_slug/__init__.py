@@ -1,7 +1,7 @@
 """
 Template SDK/Service Layer Package.
 
-IMPORTANT: Rename this package from 'project_name' to your actual project name.
+IMPORTANT: Rename this package from 'project_slug' to your actual project name.
 
 This package contains business logic, services, and utilities that are independent
 of the FastAPI application layer. It can be packaged separately and distributed
